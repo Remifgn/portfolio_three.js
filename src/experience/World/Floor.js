@@ -5,9 +5,9 @@ import Experience from "../Experience.js"
 export default class Floor{
     constructor()
     {
-        this.experiece = new Experience()
-        this.scene = this.experiece.scene
-        this.ressources= this.experiece.ressources
+        this.experience = new Experience()
+        this.scene = this.experience.scene
+        this.ressources= this.experience.ressources
         this.setGeometry()
         this.setTexture()
         this.setMaterial()
