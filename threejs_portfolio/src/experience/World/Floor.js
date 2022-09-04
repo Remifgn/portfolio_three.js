@@ -1,6 +1,6 @@
-import * as THREE from 'three'
+simport * as THREE from 'three'
 
-import Experience from "../experience.js"
+import Experience from "../Experience.js"
 
 export default class Floor{
     constructor()

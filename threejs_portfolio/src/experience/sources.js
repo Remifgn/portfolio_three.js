@@ -29,6 +29,11 @@ export default [
         name: 'foxModel',
         type: 'gltfModel',
         path: 'models/Fox/glTF/Fox.gltf'
+    },
+    {
+        name: 'woodCabinModel',
+        type: 'gltfModel',
+        path: 'models/woodCabin/glTF/cabin.glb'
     }
     
 ]

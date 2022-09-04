@@ -1,8 +1,8 @@
-import Experience from '../experience.js'
+import Experience from '../Experience.js'
 import Environment from './Environment.js'
 import Ressources from '../utils/Ressources.js'
 import Floor from './Floor.js'
-import Fox from './Fox.js'
+import WoodCabin from './WoodCabin.js'
 
 export default class World{
     constructor()
@@ -15,7 +15,7 @@ export default class World{
         {
             // Setup
             this.floor = new Floor()
-            this.fox = new Fox()
+            this.woodCabin = new WoodCabin()
             this.environment = new Environment()
             
         })
@@ -23,9 +23,9 @@ export default class World{
     }
     update()
     {
-        if(this.fox)
+        if(this.woodCabin)
         {
-            this.fox.update()
+            this.woodCabin.update()
         }
     }
 }
