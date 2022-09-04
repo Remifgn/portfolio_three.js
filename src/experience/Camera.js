@@ -9,7 +9,6 @@ export default class Camera{
     constructor()
     {
         this.experience = new Experience()
-        console.log(this.experience)
         this.sizes = this.experience.sizes
         this.canvas = this.experience.canvas
         this.scene = this.experience.scene
@@ -34,7 +33,6 @@ export default class Camera{
 
     setOrbitControl()
     {
-        console.log(this.canvas)
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
     }
