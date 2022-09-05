@@ -13,11 +13,12 @@ export default class ForestParticle{
         if (this.debug.active)
         {
             this.debugFolder= this.debug.ui.addFolder('Forest_Particle')
+
+
         }
 
         //Setup 
         this.setModel()
-
         this.setMaterial()
 
         //this.generateForest()
@@ -30,11 +31,14 @@ export default class ForestParticle{
     setModel()
     {
         this.model = this.ressources.items.forestParticleModel.scene
-        
-        this.model.scale.set(0.2, 0.2, 0.2)
+        this.scale = 0.2
+        this.model.scale.set(this.scale, this.scale, this.scale)
 
         if(this.debug.active)
         {
+            this.debugObject = {}
+            this.debugObject.scale = 0.2
+            this.scale = this.debugObject.scale
             this.debugFolder
                 .add(this.model.position, 'x')
                 .name('trees x postion')
@@ -53,8 +57,17 @@ export default class ForestParticle{
                 .min(-10)
                 .max(10)
                 .step(0.001)
-        }
-
+            this.debugFolder
+                .add(this.debugObject, 'scale')
+                .name('trees scale')
+                .min(0)
+                .max(1)
+                .step(0.001)
+                .onChange(() =>
+                {
+                    this.model.scale.set(this.debugObject.scale, this.debugObject.scale, this.debugObject.scale)
+                })
+        }   
 
         this.scene.add(this.model)
 

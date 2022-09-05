@@ -29,5 +29,9 @@ export default class World{
         {
             this.woodCabin.update()
         }
+        if(this.forestParticle)
+        {
+            this.forestParticle.update()
+        }
     }
 }
