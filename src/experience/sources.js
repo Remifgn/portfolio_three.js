@@ -41,9 +41,9 @@ export default [
         path: 'models/pine_trees/pine_trees.glb'
     },
     {
-        name: 'forestParticleTexture',
-        type: 'texture',
-        path: 'textures/bakedTextures/pineTreeTexture.jpg'
-    }
+        name: 'interior',
+        type: 'gltfModel',
+        path: 'models/woodCabinInterior/cabin_interior.glb'
+    },
     
 ]

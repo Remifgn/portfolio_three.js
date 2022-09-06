@@ -8,6 +8,8 @@ import World from './World/World.js'
 import Ressources from './utils/Ressources.js'
 import sources from './sources.js'
 import Debug from './utils/Debug.js'
+import Mouse from './utils/Mouse.js'
+import Raycaster from './utils/Raycaster.js'
 
 let instance = null
 
@@ -35,21 +37,37 @@ export default class Experience{
         this.scene = new THREE.Scene()
         this.ressources = new Ressources(sources)
         this.camera = new Camera()
+        this.mouse = new Mouse()
         this.renderer = new Renderer()
-        this.world = new World()
+    
+        // !! World and raycaster must be instanciated befor raycaster
+        this.objectToTest = []
 
+        this.world = new World()
+        this.raycaster = new Raycaster(this.objectToTest)
 
         // Sizes resize event
         this.sizes.on('resize', () => 
         {
-            this.resize()
-            
+            this.resize()  
         })
 
         // Time tick event
         this.time.on('tick', () =>
         {
             this.update()
+        })
+
+        // Mouse click event
+        this.mouse.on('click', () =>
+        {
+            this.click()
+        })
+
+        // Raycaster click event
+        this.raycaster.on('clickOnObject', () =>
+        {
+            this.clickOnObject()
         })
     }
 
@@ -64,6 +82,17 @@ export default class Experience{
         this.camera.update()
         this.world.update()
         this.renderer.update()
+        this.raycaster.testMouseRay()
+    }
+
+    click()
+    {
+        this.raycaster.testMouseClick()
+    }
+
+    clickOnObject()
+    {
+        this.world.sign1.actionOnClick()
     }
 
     destroy()

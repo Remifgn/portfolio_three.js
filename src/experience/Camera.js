@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-
+import gsap from "gsap"
 
 import Experience from "./Experience"
 
@@ -46,6 +46,19 @@ export default class Camera{
     update()
     {
         this.controls.update()
+    }
+
+    cameraMovement(cameraPosition)
+    {
+        gsap.to( this.instance.position, {
+			duration: 2,
+			x: cameraPosition.x,
+			y: cameraPosition.y,
+			z: cameraPosition.z,
+			onUpdate: function() {
+				//this.instance.lookAt( mesh.position );
+			}
+		} );
     }
 
 }
