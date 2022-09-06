@@ -26,7 +26,7 @@ export default class WoodCabin{
     setModel()
     {
         this.model = this.ressource.scene
-        this.model.scale.set(0.02, 0.02, 0.02)
+        this.model.scale.set(0.2, 0.2, 0.2)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>

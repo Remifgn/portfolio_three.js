@@ -3,6 +3,7 @@ import Environment from './Environment.js'
 import Ressources from '../utils/Ressources.js'
 import Floor from './Floor.js'
 import WoodCabin from './WoodCabin.js'
+import Forest from './Forest.js'
 
 export default class World{
     constructor()
@@ -16,6 +17,7 @@ export default class World{
             // Setup
             this.floor = new Floor()
             this.woodCabin = new WoodCabin()
+            this.forest = new Forest()
             this.environment = new Environment()
             
         })
@@ -27,5 +29,9 @@ export default class World{
         {
             this.woodCabin.update()
         }
+        // if(this.forest)
+        // {
+        //     this.forest.update()
+        // }
     }
 }

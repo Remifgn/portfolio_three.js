@@ -26,7 +26,7 @@ export default class Experience{
 
         //Option
         this.canvas = canvas
-        console.log(this.canvas + 'hello')
+        console.log(this.canvas)
 
         //Setup 
         this.debug = new Debug()
