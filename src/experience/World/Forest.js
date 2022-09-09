@@ -20,7 +20,7 @@ export default class Forest
     }
 
     setupForest()
-    {   
+    {
         this.forest = {}
         this.treeCount = 70
         this.minRadius = 6
@@ -33,7 +33,7 @@ export default class Forest
 
         this.forest.generateForest = () =>
         {
-            // Destroy old galaxy
+            // Destroy old Forest
             if(this.meshTab.length != 0)
             {
                 for(const mesh of this.meshTab)
@@ -42,39 +42,39 @@ export default class Forest
                     mesh.material.dispose()
                     this.trees.remove(mesh)
                 }
-    
+
             }
-    
+
             // Group
             this.trees = new THREE.Group()
             this.scene.add(this.trees)
             /**
              * Geometry
              */
-    
+
             const tree = new ForestParticle()
             const meshModel = tree.model.children[0]
-    
+
             for(let i = 0; i < this.treeCount; i++)
             {
-                
+
                 this.meshTab[i] = meshModel.clone()
                 this.trees.add(this.meshTab[i])
-    
+
                 // Position
                 const angle = Math.random() * Math.PI * 2 // Random angle
                 const radius = this.minRadius + Math.random() * this.forestSize     // Random radius
                 const x = Math.cos(angle) * radius        // Get the x position using cosinus
                 const z = Math.sin(angle) * radius        // Get the z position using sinus
                 const scale = Math.random() * 0.5 + this.minScale
-            
+
                 this.meshTab[i].position.set(x, this.yPos, z)
                 this.meshTab[i].scale.set(scale, scale, scale)
-    
+
                 // Rotation
                 this.meshTab[i].rotation.z = (Math.random() - 0.5) * 0.4
                 this.meshTab[i].rotation.y = (Math.random() - 0.5) * 0.4
-    
+
                 this.trees.add(this.meshTab[i])
             }
         }
@@ -120,8 +120,8 @@ export default class Forest
                 .max(1)
                 .step(0.001)
                 .onFinishChange(this.forest.generateForest)
-        }  
-        
+        }
+
         this.forest.generateForest()
-    }    
+    }
 }

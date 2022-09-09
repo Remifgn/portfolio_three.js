@@ -39,10 +39,11 @@ export default class Renderer{
         this.instance.setPixelRatio(this.sizes.pixelRatio)
     }
 
-
     update()
-    {
-        this.instance.render(this.scene, this.camera.instance)
+    {   if (this.experience.postprocessing == null)
+        {
+            this.instance.render(this.scene, this.camera.instance)
+        }
     }
-    
+
 }

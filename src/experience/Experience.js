@@ -10,6 +10,7 @@ import sources from './sources.js'
 import Debug from './utils/Debug.js'
 import Mouse from './utils/Mouse.js'
 import Raycaster from './utils/Raycaster.js'
+import PostProcessing from './Postprocessing.js'
 
 let instance = null
 
@@ -30,16 +31,19 @@ export default class Experience{
         this.canvas = canvas
         console.log(this.canvas)
 
-        //Setup 
+        //Setup
         this.debug = new Debug()
         this.sizes = new Sizes()
+
         this.time = new Time()
         this.scene = new THREE.Scene()
         this.ressources = new Ressources(sources)
         this.camera = new Camera()
         this.mouse = new Mouse()
+
         this.renderer = new Renderer()
-    
+        this.postprocessing = new PostProcessing()
+
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []
 
@@ -47,9 +51,9 @@ export default class Experience{
         this.raycaster = new Raycaster(this.objectToTest)
 
         // Sizes resize event
-        this.sizes.on('resize', () => 
+        this.sizes.on('resize', () =>
         {
-            this.resize()  
+            this.resize()
         })
 
         // Time tick event
@@ -75,6 +79,7 @@ export default class Experience{
     {
         this.camera.resize()
         this.renderer.resize()
+        this.postprocessing.resize()
     }
 
     update()
@@ -83,6 +88,7 @@ export default class Experience{
         this.world.update()
         this.renderer.update()
         this.raycaster.testMouseRay()
+        this.postprocessing.update()
     }
 
     click()
