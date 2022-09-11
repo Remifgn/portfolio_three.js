@@ -5,12 +5,12 @@ export default [
         type: 'cubeTexture',
         path:
         [
-            'textures/environmentMap/px.jpg',
-            'textures/environmentMap/nx.jpg',
-            'textures/environmentMap/py.jpg',
-            'textures/environmentMap/ny.jpg',
-            'textures/environmentMap/pz.jpg',
-            'textures/environmentMap/nz.jpg',
+            'textures/environmentMap/px.png',
+            'textures/environmentMap/nx.png',
+            'textures/environmentMap/py.png',
+            'textures/environmentMap/ny.png',
+            'textures/environmentMap/pz.png',
+            'textures/environmentMap/nz.png',
         ]
     },
     {
@@ -43,7 +43,7 @@ export default [
     {
         name: 'forestParticleModel',
         type: 'gltfModel',
-        path: 'models/pine_trees/pine_trees.glb'
+        path: 'models/pine_trees/pineTreeModelWithMaterial.glb'
     },
     {
         name: 'interior',

@@ -6,53 +6,39 @@ export default class ForestParticle{
     {
         this.experience = new Experience()
         this.ressources= this.experience.ressources
+        this.debug = this.experience.debug
 
-        //Setup 
+        if (this.debug.active) {
+            this.debugFolder = this.debug.ui.addFolder('Tree')
+        }
+
+        //Setup
         this.setModel()
-        this.setMaterial()       
+        this.setMaterial()
 
     }
 
     setModel()
     {
         this.model = this.ressources.items.forestParticleModel.scene
-        this.scale = 0.02
-        
+        console.log(this.model)
+        this.scale = 0.2
+        for (const child of this.model.children[0].children)
+        {
+            child.scale.set(this.scale, this.scale, this.scale)
+        }
 
-        // if(this.debug.active)
-        // {
-        //     this.debugObject = {}
-        //     this.debugObject.scale = 0.2
-        //     this.scale = this.debugObject.scale
-        //     this.debugFolder
-        //         .add(this.model.position, 'x')
-        //         .name('trees x postion')
-        //         .min(-10)
-        //         .max(10)
-        //         .step(0.001)
-        //     this.debugFolder
-        //         .add(this.model.position, 'y')
-        //         .name('trees y postion')
-        //         .min(-10)
-        //         .max(10)
-        //         .step(0.001)
-        //     this.debugFolder
-        //         .add(this.model.position, 'z')
-        //         .name('trees z postion')
-        //         .min(-10)
-        //         .max(10)
-        //         .step(0.001)
-        //     this.debugFolder
-        //         .add(this.debugObject, 'scale')
-        //         .name('trees scale')
-        //         .min(0)
-        //         .max(1)
-        //         .step(0.001)
-        //         .onChange(() =>
-        //         {
-        //             this.model.scale.set(this.debugObject.scale, this.debugObject.scale, this.debugObject.scale)
-        //         })
-        // }   
+
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .add(this, 'scale')
+                .name('tree scale')
+                .min(0)
+                .max(10)
+                .step(0.001)
+        }
+
 
         this.model.traverse((child) =>
         {
@@ -80,7 +66,7 @@ export default class ForestParticle{
         //         child.material = this.material
         //     }
         // })
-        
+
     }
 
 
