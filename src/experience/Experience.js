@@ -11,6 +11,7 @@ import Debug from './utils/Debug.js'
 import Mouse from './utils/Mouse.js'
 import Raycaster from './utils/Raycaster.js'
 import PostProcessing from './Postprocessing.js'
+import CamControls from './CamControls.js'
 
 let instance = null
 
@@ -39,10 +40,14 @@ export default class Experience{
         this.scene = new THREE.Scene()
         this.ressources = new Ressources(sources)
         this.camera = new Camera()
+        this.camcontrols = new CamControls()
         this.mouse = new Mouse()
 
         this.renderer = new Renderer()
         this.postprocessing = new PostProcessing()
+
+
+
 
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []

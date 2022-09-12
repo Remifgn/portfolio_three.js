@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from "../Experience.js"
+import Interior from './Interior.js'
 
 
 export default class sRGBEncoding{
@@ -10,6 +11,7 @@ export default class sRGBEncoding{
         this.scene = this.experience.scene
         this.camera = this.experience.camera
         this.debug = this.experience.debug
+        this.world = this.experience.world
 
         //Debug
         if (this.debug.active)
@@ -31,7 +33,7 @@ export default class sRGBEncoding{
         if(this.debug.active)
         {
         }
-        
+
         this.sign.position.x = 1
         this.sign.position.y = 1
         this.sign.position.z = 1
@@ -45,8 +47,10 @@ export default class sRGBEncoding{
     }
 
     actionOnClick()
-    {   
+    {
         this.camera.cameraMovement(this.cameraPosition)
+        this.world.woodCabin.destroy()
+        this.world.interior = new Interior()
     }
 
 }

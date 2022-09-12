@@ -46,9 +46,14 @@ export default [
         path: 'models/pine_trees/pineTreeModelWithMaterial.glb'
     },
     {
+        name: 'houseInteriorBakedTexture',
+        type: 'texture',
+        path: 'textures/bakedTextures/interior_structure.jpg'
+    },
+    {
         name: 'interior',
         type: 'gltfModel',
-        path: 'models/woodCabinInterior/cabin_interior.glb'
+        path: 'models/woodCabinInterior/mergedInteriorStructur.glb'
     },
     {
         name: 'groundModel',
@@ -58,7 +63,7 @@ export default [
     {
         name: 'groundBakedTexture',
         type: 'texture',
-        path: 'textures/bakedTextures/ground_baked.jpg'
+        path: 'textures/bakedTextures/ground_baked_hd.jpg'
     },
     {
         name: 'terrainModel',

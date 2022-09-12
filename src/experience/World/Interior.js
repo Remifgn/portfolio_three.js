@@ -16,10 +16,11 @@ export default class Interior{
             this.debugFolder= this.debug.ui.addFolder('interior')
         }
 
-        //Setup 
+        //Setup
         this.ressource = this.ressources.items.interior
-        
+
         this.setModel()
+        this.setMaterial()
         this.update()
     }
 
@@ -40,7 +41,16 @@ export default class Interior{
 
     setMaterial()
     {
-        
+        this.texture = this.experience.ressources.items.houseInteriorBakedTexture
+        this.texture.flipY = false
+        this.texture.encoding = THREE.sRGBEncoding
+
+        this.material = new THREE.MeshBasicMaterial({
+            map: this.texture,
+        })
+
+        this.woodCabinWithTexture = this.ressource.scene.children.find(child => child.name === 'merged_interior_structure')
+        this.woodCabinWithTexture.material = this.material
     }
 
     update()

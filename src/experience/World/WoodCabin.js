@@ -53,6 +53,20 @@ export default class WoodCabin{
         this.woodCabinWithTexture.material = this.material
     }
 
+    destroy()
+    {
+        this.model.traverse((child) =>
+        {
+            if(child instanceof THREE.Mesh)
+            {
+                child.geometry.dispose()
+                child.material.dispose()
+            }
+        })
+        this.scene.remove(this.model)
+
+    }
+
     update()
     {
     }

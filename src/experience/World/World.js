@@ -22,7 +22,7 @@ export default class World{
             this.ground = new Ground()
             this.woodCabin = new WoodCabin()
             //this.interior = new Interior()
-            const sign1CameraPosition = new THREE.Vector3(-3.29, 2.23, 0.74)
+            const sign1CameraPosition = new THREE.Vector3(-1.59, 1.594, 0.15)
             this.sign1 = new Sign(sign1CameraPosition)
             this.experience.objectToTest.push(this.sign1.sign.plane)
             this.forest = new Forest()
