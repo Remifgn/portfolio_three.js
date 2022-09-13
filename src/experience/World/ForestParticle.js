@@ -21,7 +21,6 @@ export default class ForestParticle{
     setModel()
     {
         this.model = this.ressources.items.forestParticleModel.scene
-        console.log(this.model)
         this.scale = 0.2
         for (const child of this.model.children[0].children)
         {

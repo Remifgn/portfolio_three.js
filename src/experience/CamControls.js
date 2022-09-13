@@ -15,5 +15,10 @@ export default class CamControls{
     {
         this.camera.camAngle.default()
     }
+
+    setInteriorCam()
+    {
+        this.camera.camAngle.interior()
+    }
 }
 

@@ -23,6 +23,9 @@ export default class Camera{
         this.setOrbitControl()
         this.setCamAngle()
 
+
+
+
     }
 
     setInstance()
@@ -69,12 +72,27 @@ export default class Camera{
 
         this.camAngle.default = () =>
         {
-            this.controls.minDistance = 4
+            this.controls.minDistance = 2
             this.controls.maxDistance = 14
             this.controls.minAzimuthAngle = 0
             this.controls.maxAzimuthAngle = Math.PI *1.9999
             this.controls.minPolarAngle = Math.PI *0.2
             this.controls.maxPolarAngle = 1.5
+            this.cam = false
+        }
+
+        this.camAngle.interior = () =>
+        {
+            this.controls.enableRotate = true
+            this.controls.enableZoom = true
+            this.controls.enablePan = true
+            this.controls.minDistance = 1.25
+            this.controls.maxDistance = 3
+
+            this.controls.minAzimuthAngle = -2
+            this.controls.maxAzimuthAngle = -1.11
+            this.controls.minPolarAngle = 0.92
+            this.controls.maxPolarAngle = 1.20
             this.cam = false
         }
     }
@@ -88,24 +106,86 @@ export default class Camera{
     update()
     {
         this.controls.update()
-        console.log(this.fov)
-        console.log(this.instance.position)
-        console.log(this.controls.getPolarAngle())
-        console.log(this.controls.getDistance())
+        // console.log('fov:' + this.fov)
+        // console.log('position x:' + this.instance.position.x)
+        // console.log('position y:' + this.instance.position.y)
+        // console.log('position z:' + this.instance.position.z)
+        // console.log('polar angle: ' + this.controls.getPolarAngle())
+        // console.log('polar azimute: ' + this.controls.getAzimuthalAngle())
+        // console.log('distance :' +  this.controls.getDistance())
 
     }
 
-    cameraMovement(cameraPosition)
+    cameraMovement()
     {
-        gsap.to( this.instance.position, {
-			duration: 2,
-			x: cameraPosition.x,
-			y: cameraPosition.y,
-			z: cameraPosition.z,
-			onUpdate: function() {
-				//this.instance.lookAt( mesh.position );
-			}
-		} );
+        this.cameraMovement = {}
+        this.cameraPosition = new THREE.Vector3(1, -1.6, -1.5)
+        this.controlTraget = new THREE.Vector3(1, 0.35, 0.2)
+
+        this.cameraMovement.ajust = () =>{
+            console.log(this.cameraPosition)
+            console.log(this.instance)
+
+            gsap.to(this.instance.position, { duration: 2, ease: "power1.inOut",
+            x: this.cameraPosition.x,
+            y: this.cameraPosition.y,
+            z: this.cameraPosition.z})
+            gsap.to(this.controls.target, { duration: 2, ease: "power1.inOut",
+            x: this.controlTraget.x,
+            y: this.controlTraget.y,
+            z: this.controlTraget.z})
+        }
+        if (this.debugFolder)
+        {
+            this.debugFolder
+            .add(this.cameraPosition, 'x')
+            .name('camera x')
+            .min(-10)
+            .max(10)
+            .step(0.001)
+            .onChange(this.cameraMovement.ajust)
+            this.debugFolder
+                .add(this.cameraPosition, 'y')
+                .name('camera y')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                .onChange(this.cameraMovement.ajust)
+            this.debugFolder
+                .add(this.cameraPosition, 'z')
+                .name('camera z')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                .onChange(this.cameraMovement.ajust)
+            this.debugFolder
+                .add(this.controlTraget, 'x')
+                .name('control x')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                .onChange(this.cameraMovement.ajust)
+            this.debugFolder
+                .add(this.controlTraget, 'y')
+                .name('control y')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                .onChange(this.cameraMovement.ajust)
+            this.debugFolder
+                .add(this.controlTraget, 'z')
+                .name('control z')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                .onChange(this.cameraMovement.ajust)
+        }
+        else{
+            this.cameraMovement.ajust()
+            console.log("else")
+        }
+
+
     }
 
 }

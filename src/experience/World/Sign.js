@@ -12,6 +12,7 @@ export default class sRGBEncoding{
         this.camera = this.experience.camera
         this.debug = this.experience.debug
         this.world = this.experience.world
+        this.camControls = this.experience.camcontrols
 
         //Debug
         if (this.debug.active)
@@ -48,9 +49,10 @@ export default class sRGBEncoding{
 
     actionOnClick()
     {
-        this.camera.cameraMovement(this.cameraPosition)
         this.world.woodCabin.destroy()
         this.world.interior = new Interior()
+        this.camControls.setInteriorCam()
+        this.camera.cameraMovement()
     }
 
 }

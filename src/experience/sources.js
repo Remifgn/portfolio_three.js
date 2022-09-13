@@ -51,9 +51,19 @@ export default [
         path: 'textures/bakedTextures/interior_structure.jpg'
     },
     {
-        name: 'interior',
+        name: 'interiorStructure',
         type: 'gltfModel',
         path: 'models/woodCabinInterior/mergedInteriorStructur.glb'
+    },
+    {
+        name: 'interiorObjectsBakedTexture',
+        type: 'texture',
+        path: 'textures/bakedTextures/interior_objects.jpg'
+    },
+    {
+        name: 'interiorObjectModel',
+        type: 'gltfModel',
+        path: 'models/woodCabinInterior/interior_objects.glb'
     },
     {
         name: 'groundModel',

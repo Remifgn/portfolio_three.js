@@ -17,7 +17,8 @@ export default class Interior{
         }
 
         //Setup
-        this.ressource = this.ressources.items.interior
+        this.ressource_sturcture = this.ressources.items.interiorStructure
+        this.ressource_objects = this.ressources.items.interiorObjectModel
 
         this.setModel()
         this.setMaterial()
@@ -26,7 +27,10 @@ export default class Interior{
 
     setModel()
     {
-        this.model = this.ressource.scene
+        this.model = this.ressource_sturcture.scene
+        this.model.scale.set(0.2, 0.2, 0.2)
+        this.scene.add(this.model)
+        this.model = this.ressource_objects.scene
         this.model.scale.set(0.2, 0.2, 0.2)
         this.scene.add(this.model)
 
@@ -41,16 +45,30 @@ export default class Interior{
 
     setMaterial()
     {
-        this.texture = this.experience.ressources.items.houseInteriorBakedTexture
-        this.texture.flipY = false
-        this.texture.encoding = THREE.sRGBEncoding
+        const textureStructure = this.experience.ressources.items.houseInteriorBakedTexture
+        textureStructure.flipY = false
+        textureStructure.encoding = THREE.sRGBEncoding
 
-        this.material = new THREE.MeshBasicMaterial({
-            map: this.texture,
+        const materialStructure = new THREE.MeshBasicMaterial({
+            map: textureStructure,
         })
 
-        this.woodCabinWithTexture = this.ressource.scene.children.find(child => child.name === 'merged_interior_structure')
-        this.woodCabinWithTexture.material = this.material
+        this.InteriorStructureWithTexture = this.ressource_sturcture.scene.children.find(child => child.name === 'merged_interior_structure')
+        this.InteriorStructureWithTexture.material = materialStructure
+
+        const textureObject = this.experience.ressources.items.interiorObjectsBakedTexture
+        console.log(textureObject)
+        textureObject.flipY = false
+        textureObject.encoding = THREE.sRGBEncoding
+
+        const materialObject = new THREE.MeshBasicMaterial({
+            map: textureObject,
+        })
+
+        this.ressource_objects.scene.traverse((child) =>
+        {
+            child.material = materialObject
+        })
     }
 
     update()

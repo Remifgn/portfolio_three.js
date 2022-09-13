@@ -23,7 +23,6 @@ export default class PostProcessing
         this.renderer = this.experience.renderer
         this.scene = this.experience.scene
         this.camera = this.experience.camera
-        console.log(this.experience)
         this.sizes = this.experience.sizes
         this.ressources = this.experience.ressources
 
@@ -44,10 +43,8 @@ export default class PostProcessing
             }
         )
         this.effectComposer = new EffectComposer(this.renderer.instance, this.renderTarget)
-        console.log(this.effectComposer)
         this.effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.effectComposer.setSize(this.sizes.width, this.sizes.height)
-        console.log(this.camera)
         this.renderPass = new RenderPass(this.scene, this.camera.instance)
         this.effectComposer.addPass(this.renderPass)
 
@@ -57,8 +54,6 @@ export default class PostProcessing
 
 
         this.effectComposer.addPass(effectSobel)
-
-        console.log(this.effectComposer)
     }
 
     resize()
