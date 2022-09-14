@@ -23,17 +23,19 @@ export default class Raycaster extends EventEmitter{
             if(!this.currentIntersect)
             {
                 console.log('mouse enter')
+                this.currentIntersect = this.intersects[0]
+                this.trigger('hoverObjectEnter',this.currentIntersect)
             }
-    
-            this.currentIntersect = this.intersects[0]
+
+
         }
         else
         {
             if(this.currentIntersect)
             {
-                console.log('mouse leave')
+                this.trigger('hoverObjectLeave')
             }
-            
+
             this.currentIntersect = null
         }
     }

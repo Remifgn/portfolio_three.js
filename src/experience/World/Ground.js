@@ -63,7 +63,6 @@ export default class Ground{
     setModelTerrain()
     {
         this.modelTerrain = this.ressources.items.terrainModel.scene
-        console.log(this.model)
         this.modelTerrain.scale.set(0.2, 0.2, 0.2)
         this.scene.add(this.modelTerrain)
 

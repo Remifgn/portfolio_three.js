@@ -22,9 +22,7 @@ export default class Camera{
         this.setInstance()
         this.setOrbitControl()
         this.setCamAngle()
-
-
-
+        this.setTransitions()
 
     }
 
@@ -53,6 +51,47 @@ export default class Camera{
         this.controls.target.z = -1
         this.controls.enableRotate = true
         this.controls.enableZoom = true
+    }
+
+    setTransitions()
+    {
+        this.transitions = {}
+        this.transitions.interior = async (duration) =>
+        {
+            this.controls.enableRotate = false
+            this.controls.enableZoom = false
+
+            gsap.to(this.instance.position, { duration: 2, ease: "power1.inOut",
+            x: 1,
+            y: -1.6,
+            z: -1.5})
+            gsap.to(this.controls.target, { duration: 2, ease: "power1.inOut",
+            x: 1,
+            y: 0.35,
+            z: 0.2})
+
+            await this.sleep(1500)
+            // this.controls.enableRotate = true
+            this.controls.enableZoom = true
+        }
+        this.transitions.default = async (duration) =>
+        {
+            this.controls.enableRotate = false
+            this.controls.enableZoom = false
+
+            gsap.to(this.instance.position, { duration: 2, ease: "power1.inOut",
+            x: 2.276,
+            y: 3.546,
+            z: 8.8})
+            gsap.to(this.controls.target, { duration: 2, ease: "power1.inOut",
+            x: 1,
+            y: 0.35,
+            z: 0.2})
+
+            await this.sleep(1500)
+            // this.controls.enableRotate = true
+            this.controls.enableZoom = true
+        }
     }
 
     setCamAngle()
@@ -116,21 +155,24 @@ export default class Camera{
 
     }
 
+    sleep(ms)
+    {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     cameraMovement()
     {
-        this.cameraMovement = {}
+        this.Movement = {}
         this.cameraPosition = new THREE.Vector3(1, -1.6, -1.5)
         this.controlTraget = new THREE.Vector3(1, 0.35, 0.2)
 
-        this.cameraMovement.ajust = () =>{
-            console.log(this.cameraPosition)
-            console.log(this.instance)
+        this.Movement.ajust = () =>{
 
-            gsap.to(this.instance.position, { duration: 2, ease: "power1.inOut",
+            gsap.to(this.instance.position, { duration: 0, ease: "power1.inOut",
             x: this.cameraPosition.x,
             y: this.cameraPosition.y,
             z: this.cameraPosition.z})
-            gsap.to(this.controls.target, { duration: 2, ease: "power1.inOut",
+            gsap.to(this.controls.target, { duration: 0, ease: "power1.inOut",
             x: this.controlTraget.x,
             y: this.controlTraget.y,
             z: this.controlTraget.z})
@@ -143,46 +185,45 @@ export default class Camera{
             .min(-10)
             .max(10)
             .step(0.001)
-            .onChange(this.cameraMovement.ajust)
+            .onChange(this.Movement.ajust)
             this.debugFolder
                 .add(this.cameraPosition, 'y')
                 .name('camera y')
                 .min(-10)
                 .max(10)
                 .step(0.001)
-                .onChange(this.cameraMovement.ajust)
+                .onChange(this.Movement.ajust)
             this.debugFolder
                 .add(this.cameraPosition, 'z')
                 .name('camera z')
                 .min(-10)
                 .max(10)
                 .step(0.001)
-                .onChange(this.cameraMovement.ajust)
+                .onChange(this.Movement.ajust)
             this.debugFolder
                 .add(this.controlTraget, 'x')
                 .name('control x')
                 .min(-10)
                 .max(10)
                 .step(0.001)
-                .onChange(this.cameraMovement.ajust)
+                .onChange(this.Movement.ajust)
             this.debugFolder
                 .add(this.controlTraget, 'y')
                 .name('control y')
                 .min(-10)
                 .max(10)
                 .step(0.001)
-                .onChange(this.cameraMovement.ajust)
+                .onChange(this.Movement.ajust)
             this.debugFolder
                 .add(this.controlTraget, 'z')
                 .name('control z')
                 .min(-10)
                 .max(10)
                 .step(0.001)
-                .onChange(this.cameraMovement.ajust)
+                .onChange(this.Movement.ajust)
         }
         else{
-            this.cameraMovement.ajust()
-            console.log("else")
+            this.Movement.ajust()
         }
 
 

@@ -12,6 +12,7 @@ import Mouse from './utils/Mouse.js'
 import Raycaster from './utils/Raycaster.js'
 import PostProcessing from './Postprocessing.js'
 import CamControls from './CamControls.js'
+import Actions from './Actions.js'
 
 let instance = null
 
@@ -44,16 +45,14 @@ export default class Experience{
         this.mouse = new Mouse()
 
         this.renderer = new Renderer()
-        this.postprocessing = new PostProcessing()
-
-
-
 
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []
 
         this.world = new World()
         this.raycaster = new Raycaster(this.objectToTest)
+        this.postprocessing = new PostProcessing()
+        this.actions = new Actions()
 
         // Sizes resize event
         this.sizes.on('resize', () =>
@@ -67,17 +66,6 @@ export default class Experience{
             this.update()
         })
 
-        // Mouse click event
-        this.mouse.on('click', () =>
-        {
-            this.click()
-        })
-
-        // Raycaster click event
-        this.raycaster.on('clickOnObject', () =>
-        {
-            this.clickOnObject()
-        })
     }
 
     resize()
@@ -94,16 +82,6 @@ export default class Experience{
         this.renderer.update()
         this.raycaster.testMouseRay()
         this.postprocessing.update()
-    }
-
-    click()
-    {
-        this.raycaster.testMouseClick()
-    }
-
-    clickOnObject()
-    {
-        this.world.sign1.actionOnClick()
     }
 
     destroy()
