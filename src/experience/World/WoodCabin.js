@@ -41,16 +41,39 @@ export default class WoodCabin{
 
     setMaterial()
     {
+
         this.texture = this.experience.ressources.items.houseBakedTexture
         this.texture.flipY = false
         this.texture.encoding = THREE.sRGBEncoding
 
-        this.material = new THREE.MeshBasicMaterial({
+        this.debugParams = {}
+        this.debugParams.color = 0x908431
+
+        this.bakedMaterial = new THREE.MeshBasicMaterial({
             map: this.texture,
+            side: THREE.DoubleSide
         })
 
+        this.windowMaterial = new THREE.MeshBasicMaterial({
+            color: this.debugParams.color
+        })
+
+        if (this.debug.active) {
+
+            this.debugFolder
+                .addColor(this.debugParams,'color')
+                .onChange(() =>
+                {
+                    this.windowMaterial.color.set(this.debugParams.color)
+                })
+        }
+
+
         this.woodCabinWithTexture = this.ressource.scene.children.find(child => child.name === 'merged_house')
-        this.woodCabinWithTexture.material = this.material
+        this.woodCabinWithTexture.material = this.bakedMaterial
+        console.log(this.ressource.scene.children)
+        this.WindowWithTexture = this.ressource.scene.children.find(child => child.name === 'windows_exterior')
+        this.WindowWithTexture.material = this.windowMaterial
     }
 
     destroy()

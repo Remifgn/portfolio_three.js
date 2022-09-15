@@ -43,8 +43,8 @@ export default class Actions{
         {
             this.world.woodCabin.destroy()
             this.world.interior = new Interior()
-            this.camera.transitions.interior()
-            this.camControls.setInteriorCam()
+            this.camera.transitions.interior(2)
+            this.camera.camAngle.interior()
 
         }
 
@@ -53,13 +53,37 @@ export default class Actions{
             console.log('test')
             this.world.interior.destroy()
             this.world.woodCabin = new WoodCabin()
-            this.camera.transitions.default()
-            this.camControls.setDefaultCam()
+            this.camera.transitions.default(2)
+            this.camera.camAngle.default()
         }
 
-        this.actions.sign3 = () =>
+        this.actions.insa_logo = () =>
         {
-
+            window.open('https://www.insa-rennes.fr/eii.html', '_blank').focus();
+        }
+        this.actions.strathclyde_logo = () =>
+        {
+            window.open('https://www.strath.ac.uk/courses/postgraduatetaught/electronicelectricalengineering/', '_blank').focus();
+        }
+        this.actions.instagramme_logo = () =>
+        {
+            window.open('https://www.instagram.com/polymoufle/', '_blank').focus();
+        }
+        this.actions.linkedin_logo = () =>
+        {
+            window.open('https://www.linkedin.com/in/r%C3%A9mi-fargeon-581634132/', '_blank').focus();
+        }
+        this.actions.artline_logo = () =>
+        {
+            window.open('https://www.artstation.com/user-642697', '_blank').focus();
+        }
+        this.actions.upwork_logo = () =>
+        {
+            window.open('https://www.upwork.com/freelancers/~01360880391a70a64d', '_blank').focus();
+        }
+        this.actions.github_logo = () =>
+        {
+            window.open('https://github.com/Remifgn/portfolio_three.js', '_blank').focus();
         }
 
     }

@@ -33,7 +33,7 @@ export default [
     {
         name: 'woodCabinModel',
         type: 'gltfModel',
-        path: 'models/woodCabin/glTF/merged_house.glb'
+        path: 'models/woodCabin/glTF/woodCabin.glb'
     },
     {
         name: 'houseBakedTexture',
@@ -73,7 +73,7 @@ export default [
     {
         name: 'groundBakedTexture',
         type: 'texture',
-        path: 'textures/bakedTextures/ground_baked_hd.jpg'
+        path: 'textures/bakedTextures/ground_baked_1.jpg'
     },
     {
         name: 'terrainModel',
@@ -84,5 +84,10 @@ export default [
         name: 'terrainTexture',
         type: 'texture',
         path: 'textures/bakedTextures/terrain_baked_colors.jpg'
+    },
+    {
+        name: 'flowerModel',
+        type: 'gltfModel',
+        path: 'models/flower/flower.glb',
     },
 ]

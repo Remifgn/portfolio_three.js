@@ -35,7 +35,7 @@ export default class Ground{
                 .step(0.001)
         }
         this.modelGround.scale.set(0.2, 0.2, 0.2)
-        this.modelGround.position.y = -0.275
+        this.modelGround.position.y = 0
         this.scene.add(this.modelGround)
 
         this.modelGround.traverse((child) =>

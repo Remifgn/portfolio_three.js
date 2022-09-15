@@ -8,6 +8,7 @@ import WoodCabin from './WoodCabin.js'
 import Forest from './Forest.js'
 import Interior from './Interior.js'
 import Sign from './Sign.js'
+import Flowers from './Flowers.js'
 
 export default class World{
     constructor()
@@ -33,6 +34,7 @@ export default class World{
 
 
             this.forest = new Forest()
+            this.flowers = new Flowers()
             this.environment = new Environment()
 
         })
@@ -43,6 +45,10 @@ export default class World{
         if(this.woodCabin)
         {
             this.woodCabin.update()
+        }
+        if(this.flowers)
+        {
+            this.flowers.update()
         }
         // if(this.forest)
         // {

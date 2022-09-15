@@ -45,7 +45,7 @@ export default class Camera{
     {
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
-        this.controls.enablePan = true
+        this.controls.enablePan = false
         this.controls.rotateSpeed = 1.2
         this.controls.zoomSpeed = 0.8
         this.controls.target.z = -1
@@ -74,8 +74,10 @@ export default class Camera{
             // this.controls.enableRotate = true
             this.controls.enableZoom = true
         }
+
         this.transitions.default = async (duration) =>
         {
+            console.log('hello')
             this.controls.enableRotate = false
             this.controls.enableZoom = false
 
@@ -111,6 +113,8 @@ export default class Camera{
 
         this.camAngle.default = () =>
         {
+            this.controls.enableRotate = true
+            this.controls.enableZoom = true
             this.controls.minDistance = 2
             this.controls.maxDistance = 14
             this.controls.minAzimuthAngle = 0
@@ -124,7 +128,6 @@ export default class Camera{
         {
             this.controls.enableRotate = true
             this.controls.enableZoom = true
-            this.controls.enablePan = true
             this.controls.minDistance = 1.25
             this.controls.maxDistance = 3
 
