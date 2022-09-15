@@ -10,6 +10,13 @@ export default class Renderer{
         this.canvas = this.experience.canvas
         this.scene = this.experience.scene
         this.camera = this.experience.camera
+        this.debug = this.experience.debug
+
+        if(this.debug.active)
+        {
+            this.debugFolder = this.debug.ui.addFolder('renderer')
+        }
+
 
         this.setInstance()
 
@@ -28,9 +35,22 @@ export default class Renderer{
         this.instance.toneMappingExposure = 1.75
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
-        this.instance.setClearColor('#211d20')
+        if(this.debug.active)
+        {
+            this.debugParams = {}
+            this.debugParams.color = 0x009ceb
+
+            this.debugFolder
+                .addColor(this.debugParams, 'color')
+                .onChange(() =>
+                {
+                    this.instance.setClearColor(this.debugParams.color)
+                })
+        }
+        this.instance.setClearColor(0x009ceb)
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
+
     }
 
     resize()
@@ -40,7 +60,8 @@ export default class Renderer{
     }
 
     update()
-    {   if (this.experience.postprocessing == null)
+    {
+        if (this.experience.postprocessing == null)
         {
             this.instance.render(this.scene, this.camera.instance)
         }

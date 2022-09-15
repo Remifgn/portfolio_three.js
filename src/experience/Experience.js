@@ -44,12 +44,11 @@ export default class Experience{
         this.camcontrols = new CamControls()
         this.mouse = new Mouse()
 
-        this.renderer = new Renderer()
-
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []
-
         this.world = new World()
+
+        this.renderer = new Renderer()
         this.raycaster = new Raycaster(this.objectToTest)
         this.postprocessing = new PostProcessing()
         this.actions = new Actions()
