@@ -92,7 +92,7 @@ export default class Flowers{
 
         // Assign random colors to the blossoms.
         const color = new THREE.Color();
-        const blossomPalette = [ 0xF20587, 0xF2D479, 0xF2C879, 0xF2B077, 0xF24405 ];
+        const blossomPalette = [ 0xF20587, 0xF2D479, 0xF2C879, 0xF2B077, 0xF24405, 0xFFFFFF, 0xFFDD00 ];
 
         for ( let i = 0; i < this.sampleParams.count; i ++ ) {
 
@@ -143,8 +143,7 @@ export default class Flowers{
                 .add( this.debugObject, 'distribution' )
                 .options( [ 'random', 'weighted' ] )
                 .onChange( this.resample );
-            this.debugFolder
-                .add( this.debugObject, 'resample' );
+
         }
     }
 
@@ -186,7 +185,9 @@ export default class Flowers{
             this.blossomMesh.instanceMatrix.needsUpdate = true;
 
         }
-        this.debugObject.resample = this.resample(),
+        this.debugObject.resample = this.resample
+        this.debugFolder
+            .add( this.debugObject, 'resample' )
         this.resample()
     }
 

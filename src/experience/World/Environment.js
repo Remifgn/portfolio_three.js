@@ -11,7 +11,7 @@ export default class Environment
         this.debug = this.experience.debug
 
         // Debug
-        
+
         if (this.debug.active)
         {
             this.debugFolder= this.debug.ui.addFolder('environment')
@@ -19,6 +19,38 @@ export default class Environment
 
         this.setSunLight()
         this.setEvironmentMap()
+        this.setFog()
+    }
+
+    setFog()
+    {
+        //Fog
+        this.fog = new THREE.Fog('#009ceb', 10, 40)
+        this.scene.fog = this.fog
+
+        if(this.debug.active)
+        {
+            this.debugParams = {}
+            this.debugParams.color = 0x009ceb
+
+            this.debugFolder
+                .addColor(this.debugParams, 'color')
+                .onChange(() =>
+                {
+                    this.fog.color.set(this.debugParams.color)
+                })
+            this.debugFolder
+                .add(this.fog, 'near')
+                .min(0)
+                .max(20)
+                .step(0.001)
+            this.debugFolder
+                .add(this.fog, 'far')
+                .min(this.fog.near)
+                .max(40)
+                .step(0.001)
+
+        }
     }
 
     setSunLight()
@@ -38,21 +70,21 @@ export default class Environment
                 .min(0)
                 .max(10)
                 .step(0.001)
-            
+
             this.debugFolder
                 .add(this.sunLight.position, 'x')
                 .name('sunLightX')
                 .min(- 5)
                 .max(5)
                 .step(0.001)
-            
+
             this.debugFolder
                 .add(this.sunLight.position, 'y')
                 .name('sunLightY')
                 .min(- 5)
                 .max(5)
                 .step(0.001)
-            
+
             this.debugFolder
                 .add(this.sunLight.position, 'z')
                 .name('sunLightZ')
@@ -72,10 +104,10 @@ export default class Environment
         this.scene.environment = this.environmentMap.texture
 
         this.environmentMap.updateMaterials = () =>{
-            
+
             this.scene.traverse((child) =>
             {
-                if (child instanceof THREE.Mesh 
+                if (child instanceof THREE.Mesh
                     && child.material instanceof THREE.MeshStandardMaterial)
                     {
                         child.material.envMap = this.environmentMap.texture
@@ -99,5 +131,5 @@ export default class Environment
 
         this.environmentMap.updateMaterials()
     }
-    
+
 }
