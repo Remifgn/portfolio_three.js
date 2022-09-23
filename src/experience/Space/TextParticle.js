@@ -26,9 +26,28 @@ export default class TextParticle{
             this.debugFolder= this.debug.ui.addFolder('SpaceEnvironment')
         }
         this.meshesArray = []
+        this.setMeshMat()
+        this.createSphereMesh(this.meshesArray)
         this.createTextMesh([ "Why does it", "disappear ?? "])
         this.setupAnimation()
         this.setParticleSystem(this.meshesArray)
+
+    }
+    setMeshMat()
+    {
+        this.meshMat = new THREE.MeshBasicMaterial(0xffffff)
+        this.meshMat.wireframe = true
+    }
+    createSphereMesh(meshesArray)
+    {
+        const sphereMesh = new THREE.Mesh(
+            new THREE.SphereGeometry(600, 32, 32),
+            this.meshMat
+        )
+        const meshEntry = {}
+        meshEntry.geometry = sphereMesh.geometry
+        meshEntry.mesh = sphereMesh
+        meshesArray.push(meshEntry)
 
     }
 
@@ -51,14 +70,13 @@ export default class TextParticle{
                                     bevelSegments: 4
                                 }
                             )
-            this.textMat = new THREE.MeshBasicMaterial(0xffffff)
-            this.textMat.wireframe = true
+
 
 
             meshEntry.geometry.center()
             meshEntry.mesh = new THREE.Mesh(
                 meshEntry.geometry,
-                this.textMat
+                this.meshMat
             )
             this.meshesArray.push(meshEntry)
         }
@@ -142,16 +160,24 @@ export default class TextParticle{
                 meshEntry.points[i3 + 1] = tempPosition.y
                 meshEntry.points[i3 + 2] = tempPosition.z
 
+
                 this.scales[i] = Math.random()
 
             }
         }
 
         this.particles.setAttribute('aScale', new THREE.BufferAttribute(this.scales, 1))
+        //this.particles.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 
 
 
         this.particlesPoints = new THREE.Points(this.particles, this.materialShader)
+
+        // fix particle disappear on camera angle
+        let m = new THREE.Matrix4()
+        m.makeRotationX(THREE.MathUtils.degToRad(90))
+        m.scale(new THREE.Vector3(500, 500, 500))
+        this.particlesPoints.geometry.applyMatrix4(m)
         this.scene.add(this.particlesPoints)
         console.log(this.particlesPoints)
 

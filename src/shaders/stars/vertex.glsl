@@ -24,8 +24,8 @@ void main()
     float new_x = modelPosition.x*cos(uTime) - modelPosition.z*sin(uTime);
     float new_z = modelPosition.z*cos(uTime) + modelPosition.x*sin(uTime);
 
-    vec3 pointCoordonates = vec3(new_x, modelPosition.y, new_z) + uOrigin
-    vec4 viewPosition =  viewMatrix * (vec4(pointCoordonates, 1));
+
+    vec4 viewPosition =  viewMatrix * (vec4(new_x, modelPosition.y, new_z, 1) + vec4(uOrigin, 0));
     // vec4 viewPosition =  viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
     gl_Position = projectedPosition;
@@ -35,9 +35,7 @@ void main()
     /**
         * Size
     */
-    float strength = distance(pointCoordonates, uOrigin);
-    gl_PointSize = uSize * aScale * strength;
-    //(abs(sin(uTime)) + 0.5) * 10.0;
+    gl_PointSize = uSize * aScale;
 
     gl_PointSize *= (1.0 / - viewPosition.z);
 

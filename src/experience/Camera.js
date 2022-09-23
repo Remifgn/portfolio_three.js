@@ -117,8 +117,8 @@ export default class Camera{
 
         this.camAngle.space = () =>
         {
-            this.instance.position.set(-349, -206, 455)
-            this.instance.rotation.set(0.17, -0.2695, 0.0457)
+            this.instance.position.set(-389, -224, 488)
+            this.instance.rotation.set(0.23, -0.44, 0.104)
             this.controls.target.set(-350, -205, 410)
             this.controls.enableZoom = true
             this.controls.enablePan = true
@@ -170,16 +170,16 @@ export default class Camera{
     update()
     {
         this.controls.update()
-        console.log(this.instance.rotation.x)
-        console.log(this.instance.rotation.y)
-        console.log(this.instance.rotation.z)
-        console.log('fov:' + this.fov)
-        console.log('position x:' + this.instance.position.x)
-        console.log('position y:' + this.instance.position.y)
-        console.log('position z:' + this.instance.position.z)
-        console.log('polar angle: ' + this.controls.getPolarAngle())
-        console.log('polar azimute: ' + this.controls.getAzimuthalAngle())
-        console.log('distance :' +  this.controls.getDistance())
+        // console.log(this.instance.rotation.x)
+        // console.log(this.instance.rotation.y)
+        // console.log(this.instance.rotation.z)
+        // console.log('fov:' + this.fov)
+        // console.log('position x:' + this.instance.position.x)
+        // console.log('position y:' + this.instance.position.y)
+        // console.log('position z:' + this.instance.position.z)
+        // console.log('polar angle: ' + this.controls.getPolarAngle())
+        // console.log('polar azimute: ' + this.controls.getAzimuthalAngle())
+        // console.log('distance :' +  this.controls.getDistance())
 
     }
 
