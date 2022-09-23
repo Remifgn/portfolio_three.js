@@ -41,7 +41,7 @@ export default class TextParticle{
     createSphereMesh(meshesArray)
     {
         const sphereMesh = new THREE.Mesh(
-            new THREE.SphereGeometry(600, 32, 32),
+            new THREE.SphereGeometry(800, 32, 32),
             this.meshMat
         )
         const meshEntry = {}
@@ -108,9 +108,10 @@ export default class TextParticle{
             uniforms: {
                 uSize: {value: this.particleSystemParams.particleSize * this.sizes.pixelRatio},
                 uTime: { value: 0 },
+                uRotationSpeed:{value: this.particleSystemParams.rotationSpeed},
                 uMix: { value: 0 },
                 uStartTime: { value: 0 },
-                uTransitionTime: { value: this.animationVars.transitionTime },
+                uTransitionTime: { value: this.animationParams.transitionTime },
                 uOrigin: {value: new THREE.Vector3(-371, -194, 400)}
             }
         })
@@ -174,10 +175,9 @@ export default class TextParticle{
         this.particlesPoints = new THREE.Points(this.particles, this.materialShader)
 
         // fix particle disappear on camera angle
-        let m = new THREE.Matrix4()
-        m.makeRotationX(THREE.MathUtils.degToRad(90))
-        m.scale(new THREE.Vector3(500, 500, 500))
-        this.particlesPoints.geometry.applyMatrix4(m)
+        this.particlesPoints.frustumCulled = false
+
+
         this.scene.add(this.particlesPoints)
         console.log(this.particlesPoints)
 
@@ -188,45 +188,46 @@ export default class TextParticle{
         this.meshIdx++
         this.particles.setAttribute('position', new THREE.BufferAttribute(this.meshesArray[(this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
         this.particles.setAttribute(`aNewPosition`, new THREE.BufferAttribute(this.meshesArray[((this.meshIdx +1) % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
-        this.animationVars.startTime = this.time.elapsedTime
+        this.animationParams.startTime = this.time.elapsedTime
 
     }
 
     setupAnimation()
     {
-        this.animationVars = {
+        this.animationParams = {
             defaultAnimationSpeed : 1,
             morphAnimationSpeed : 18,
             startTime: 0,
             transitionTime : 2000,
             rotation: -45,
+            rotationSpeed: 1,
         }
 
-        this.animationVars.normalSpeed = (this.animationVars.defaultAnimationSpeed / 100)
-        this.animationVars.fullSpeed = (this.animationVars.morphAnimationSpeed / 100)
+        this.animationParams.normalSpeed = (this.animationParams.defaultAnimationSpeed / 100)
+        this.animationParams.fullSpeed = (this.animationParams.morphAnimationSpeed / 100)
 
-        this.animationVars.speed = this.animationVars.normalSpeed
-        // this.animationVars.color = this.particleSystemParams.color
+        this.animationParams.speed = this.animationParams.normalSpeed
+        // this.animationParams.color = this.particleSystemParams.color
     }
 
     animate()
     {
 
-        this.particles.rotation.y += this.animationVars.speed
+        this.particles.rotation.y += this.animationParams.speed
 
-        this.particleSystem.material.color = new THREE.Color( animationVars.color )
+        this.particleSystem.material.color = new THREE.Color( animationParams.color )
     }
 
     morphTo(newParticles, color = '#FFFFFF')
     {
 
-        gsap.to(animationVars, .1, {
+        gsap.to(animationParams, .1, {
             ease: Power4.easeIn,
             speed: fullSpeed,
             onComplete: this.slowDown
         })
 
-        gsap.to(animationVars, 2, {
+        gsap.to(animationParams, 2, {
             ease: Linear.easeNone,
             color: color
         })
@@ -235,24 +236,33 @@ export default class TextParticle{
         // particleSystem.material.color.setHex(color)
 
 
-        gsap.to(animationVars, 2, {
+        gsap.to(animationParams, 2, {
             ease: Elastic.easeOut.config( 0.1, .3),
-            rotation: animationVars.rotation == 45 ? -45 : 45,
+            rotation: animationParams.rotation == 45 ? -45 : 45,
         })
     }
     slowDown ()
     {
-        gsap.to(this.animationVars, 0.3, {ease:
+        gsap.to(this.animationParams, 0.3, {ease:
         Power2.easeOut, speed: normalSpeed, delay: 0.2})
     }
 
     update ()
     {
-        this.materialShader.uniforms.uTime.value = this.time.elapsedTime * 0.0001
-
-        if( this.animationVars.startTime + this.animationVars.transitionTime > this.time.elapsedTime)
+        if(((this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length) == 2)
         {
-            this.materialShader.uniforms.uMix.value = (this.time.elapsedTime - this.animationVars.startTime) / this.animationVars.transitionTime
+            this.materialShader.uniforms.uRotationSpeed.value = 0.01
+        }
+        else
+        {
+            this.materialShader.uniforms.uRotationSpeed.value = this.animationParams.rotationSpeed
+        }
+        this.materialShader.uniforms.uTime.value = this.time.elapsedTime * 0.001
+        // console.log(Math.sin(this.materialShader.uniforms.uTime.value)+1)
+
+        if( this.animationParams.startTime + this.animationParams.transitionTime > this.time.elapsedTime)
+        {
+            this.materialShader.uniforms.uMix.value = (this.time.elapsedTime - this.animationParams.startTime) / this.animationParams.transitionTime
         }
     }
 }
