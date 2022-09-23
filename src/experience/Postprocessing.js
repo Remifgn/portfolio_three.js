@@ -29,7 +29,7 @@ export default class PostProcessing
         this.ressources = this.experience.ressources
         this.raycaster = this.experience.raycaster
         this.setEffectComposer()
-        this.setSobelEffect()
+        // this.setSobelEffect()
         this.setOutlineEffect()
     }
 
@@ -48,13 +48,12 @@ export default class PostProcessing
         this.effectComposer = new EffectComposer(this.renderer.instance, this.renderTarget)
         this.effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
         this.effectComposer.setSize(this.sizes.width, this.sizes.height)
+        this.renderPass = new RenderPass(this.scene, this.camera.instance)
+        this.effectComposer.addPass(this.renderPass)
     }
 
     setSobelEffect()
     {
-        this.renderPass = new RenderPass(this.scene, this.camera.instance)
-        this.effectComposer.addPass(this.renderPass)
-
         const effectSobel = new ShaderPass( SobelOutline )
         effectSobel.uniforms[ 'resolution' ].value.x = window.innerWidth * Math.min(window.devicePixelRatio, 2)
         effectSobel.uniforms[ 'resolution' ].value.y = window.innerHeight * Math.min(window.devicePixelRatio, 2)

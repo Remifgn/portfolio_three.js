@@ -13,6 +13,7 @@ import Raycaster from './utils/Raycaster.js'
 import PostProcessing from './Postprocessing.js'
 import CamControls from './CamControls.js'
 import Actions from './Actions.js'
+import Space from './Space/Space.js'
 
 let instance = null
 
@@ -46,12 +47,13 @@ export default class Experience{
 
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []
-        this.world = new World()
-
+        //this.world = new World()
+        this.space = new Space()
         this.renderer = new Renderer()
         this.raycaster = new Raycaster(this.objectToTest)
         this.postprocessing = new PostProcessing()
         this.actions = new Actions()
+        this.actions.actions.default()
 
         // Sizes resize event
         this.sizes.on('resize', () =>
@@ -77,7 +79,8 @@ export default class Experience{
     update()
     {
         this.camera.update()
-        this.world.update()
+        //this.world.update()
+        this.space.update()
         this.renderer.update()
         this.raycaster.testMouseRay()
         this.postprocessing.update()

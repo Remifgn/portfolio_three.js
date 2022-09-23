@@ -47,7 +47,7 @@ export default class Renderer{
                     this.instance.setClearColor(this.debugParams.color)
                 })
         }
-        this.instance.setClearColor(0x009ceb)
+        this.instance.setClearColor(0x171e21)
         this.instance.setSize(this.sizes.width, this.sizes.height)
         this.instance.setPixelRatio(this.sizes.pixelRatio)
 

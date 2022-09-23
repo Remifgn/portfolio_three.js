@@ -9,6 +9,7 @@ import Forest from './Forest.js'
 import Interior from './Interior.js'
 import Sign from './Sign.js'
 import Flowers from './Flowers.js'
+import Smoke from './Smoke.js'
 
 export default class World{
     constructor()
@@ -19,7 +20,8 @@ export default class World{
 
         this.ressources.on('ready', () =>
         {
-            // Setup
+            this.environment = new Environment()
+            //Setup
             this.ground = new Ground()
             this.woodCabin = new WoodCabin()
             //this.interior = new Interior()
@@ -34,8 +36,9 @@ export default class World{
 
 
             this.forest = new Forest()
-            this.flowers = new Flowers()
-            this.environment = new Environment()
+            //this.flowers = new Flowers()
+            // this.smoke = new Smoke()
+
 
         })
 
@@ -49,6 +52,10 @@ export default class World{
         if(this.flowers)
         {
             this.flowers.update()
+        }
+        if(this.smoke)
+        {
+            this.smoke.animate()
         }
         // if(this.forest)
         // {

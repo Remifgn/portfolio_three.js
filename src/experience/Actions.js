@@ -10,6 +10,7 @@ export default class Actions{
         this.postprocessing = this.experience.postprocessing
         this.mouse = this.experience.mouse
         this.world = this.experience.world
+        this.space = this.experience.space
         this.camera = this.experience.camera
         this.camControls = this.experience.camcontrols
 
@@ -38,6 +39,10 @@ export default class Actions{
     setActions()
     {
         this.actions = {}
+        this.actions.default = () =>
+        {
+            this.camera.camAngle.space()
+        }
 
         this.actions.sign1 = () =>
         {
@@ -86,6 +91,12 @@ export default class Actions{
             window.open('https://github.com/Remifgn/portfolio_three.js', '_blank').focus();
         }
 
+
+        this.actions.particleMorph = () =>
+        {
+            this.space.textParticle.triggerMorph()
+        }
+
     }
 
     setActionOnClick(){
@@ -93,6 +104,7 @@ export default class Actions{
         this.mouse.on('click', () =>
         {
             this.raycaster.testMouseClick()
+            this.actions.particleMorph()
         })
 
         this.raycaster.on('clickOnObject', () =>

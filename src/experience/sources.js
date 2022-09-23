@@ -90,4 +90,25 @@ export default [
         type: 'gltfModel',
         path: 'models/flower/flower.glb',
     },
+    {
+        name: 'satelliteModel',
+        type: 'gltfModel',
+        path: 'models/satellite/satellite.glb',
+    },
+    {
+        name: 'planetModel',
+        type: 'gltfModel',
+        path: 'models/planet/planet.glb',
+    },
+    // {
+    //     name: 'codeProFont',
+    //     type: 'ttfFont',
+    //     path: 'fonts/SourceCodePro-Italic.ttf',
+    // },
+    {
+        name: 'helvetica',
+        type: 'jsonFont',
+        path: 'fonts/helvetiker_regular.typeface.json',
+    },
+
 ]

@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from "gsap"
 
 import Experience from "./Experience"
+import { Vector3 } from 'three'
 
 
 export default class Camera{
@@ -33,7 +34,7 @@ export default class Camera{
             this.fov,
             this.sizes.width / this.sizes.height,
             0.1,
-            100
+            1000
         )
 
         this.instance.position.set(6, 4, 8)
@@ -70,7 +71,7 @@ export default class Camera{
             y: 0.35,
             z: 0.2})
 
-            await this.sleep(1500)
+            // await this.sleep(1500)
             // this.controls.enableRotate = true
             this.controls.enableZoom = true
         }
@@ -90,7 +91,7 @@ export default class Camera{
             y: 0.35,
             z: 0.2})
 
-            await this.sleep(1500)
+            // await this.sleep(1500)
             // this.controls.enableRotate = true
             this.controls.enableZoom = true
         }
@@ -98,17 +99,40 @@ export default class Camera{
 
     setCamAngle()
     {
+
         this.camAngle = {}
 
         this.camAngle.unlocked = () =>
         {
-            this.controls.maxDistance = 30
+            this.controls.enableZoom = true
+            this.controls.enablePan = true
+            this.controls.maxDistance = 1000
             this.controls.minDistance = 0
+            this.controls.minAzimuthAngle = 0
+            this.controls.maxAzimuthAngle = - Math.PI * 1.999
+            this.controls.minPolarAngle = 0
+            this.controls.maxPolarAngle = Math.PI
+            this.cam = true
+        }
+
+        this.camAngle.space = () =>
+        {
+            this.instance.position.set(-349, -206, 455)
+            this.instance.rotation.set(0.17, -0.2695, 0.0457)
+            this.controls.target.set(-350, -205, 410)
+            this.controls.enableZoom = true
+            this.controls.enablePan = true
+            this.controls.enableRotate = true
+            this.controls.maxDistance = 90
+            this.controls.minDistance = 0
+            // this.controls.minAzimuthAngle = -1.14
+            // this.controls.maxAzimuthAngle = -0.27
+            // this.controls.minPolarAngle = 1.61
+            // this.controls.maxPolarAngle = 2.22
             this.controls.minAzimuthAngle = 0
             this.controls.maxAzimuthAngle = Math.PI * 1.999
             this.controls.minPolarAngle = 0
             this.controls.maxPolarAngle = Math.PI
-            this.cam = true
         }
 
         this.camAngle.default = () =>
@@ -121,7 +145,6 @@ export default class Camera{
             this.controls.maxAzimuthAngle = Math.PI *1.9999
             this.controls.minPolarAngle = Math.PI *0.2
             this.controls.maxPolarAngle = 1.5
-            this.cam = false
         }
 
         this.camAngle.interior = () =>
@@ -135,7 +158,6 @@ export default class Camera{
             this.controls.maxAzimuthAngle = -1.11
             this.controls.minPolarAngle = 0.92
             this.controls.maxPolarAngle = 1.20
-            this.cam = false
         }
     }
 
@@ -148,13 +170,16 @@ export default class Camera{
     update()
     {
         this.controls.update()
-        // console.log('fov:' + this.fov)
-        // console.log('position x:' + this.instance.position.x)
-        // console.log('position y:' + this.instance.position.y)
-        // console.log('position z:' + this.instance.position.z)
-        // console.log('polar angle: ' + this.controls.getPolarAngle())
-        // console.log('polar azimute: ' + this.controls.getAzimuthalAngle())
-        // console.log('distance :' +  this.controls.getDistance())
+        console.log(this.instance.rotation.x)
+        console.log(this.instance.rotation.y)
+        console.log(this.instance.rotation.z)
+        console.log('fov:' + this.fov)
+        console.log('position x:' + this.instance.position.x)
+        console.log('position y:' + this.instance.position.y)
+        console.log('position z:' + this.instance.position.z)
+        console.log('polar angle: ' + this.controls.getPolarAngle())
+        console.log('polar azimute: ' + this.controls.getAzimuthalAngle())
+        console.log('distance :' +  this.controls.getDistance())
 
     }
 

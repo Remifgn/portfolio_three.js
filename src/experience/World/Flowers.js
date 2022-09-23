@@ -26,7 +26,7 @@ export default class Flowers{
         }
 
         this.debugObject = {
-            count: 2000,
+            count: 200,
             distribution: 'random',
             surfaceColor: 0xFFF784,
             backgroundColor: 0xE39469,
@@ -186,9 +186,13 @@ export default class Flowers{
             this.blossomMesh.instanceMatrix.needsUpdate = true;
 
         }
-        this.debugObject.resample = this.resample
-        this.debugFolder
-            .add( this.debugObject, 'resample' )
+        if(this.debug.active)
+        {
+            this.debugObject.resample = this.resample
+            this.debugFolder
+                .add( this.debugObject, 'resample' )
+        }
+
         this.resample()
     }
 
