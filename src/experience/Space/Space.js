@@ -21,7 +21,7 @@ export default class Space{
         {
             this.environment = new SpaceEnvironment()
 
-            this.satelite = new Satellite()
+            this.satellite = new Satellite()
 
             this.textParticle = new TextParticle()
 

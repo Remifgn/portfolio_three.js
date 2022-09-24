@@ -28,7 +28,8 @@ export default class TextParticle{
         this.meshesArray = []
         this.setMeshMat()
         this.createSphereMesh(this.meshesArray)
-        this.createTextMesh([ "Why does it", "disappear ?? "])
+        this.textContent = [ "Hi, Welcome..", "Looking for something ?", "lets explore !"]
+        this.createTextMesh(this.textContent)
         this.setupAnimation()
         this.setParticleSystem(this.meshesArray)
 
@@ -61,8 +62,8 @@ export default class TextParticle{
                                 text,
                                 {
                                     font: this.font,
-                                    size: 5,
-                                    height: 2,
+                                    size: 3,
+                                    height: 1,
                                     curveSegments: 5,
                                     bevelEnabled: true,
                                     bevelThickness: 0.03,
@@ -108,11 +109,12 @@ export default class TextParticle{
             uniforms: {
                 uSize: {value: this.particleSystemParams.particleSize * this.sizes.pixelRatio},
                 uTime: { value: 0 },
+                uAngle: {value: 0.368},
                 uRotationSpeed:{value: this.particleSystemParams.rotationSpeed},
                 uMix: { value: 0 },
                 uStartTime: { value: 0 },
                 uTransitionTime: { value: this.animationParams.transitionTime },
-                uOrigin: {value: new THREE.Vector3(-371, -194, 400)}
+                uOrigin: {value: new THREE.Vector3(-349, -188, 400)}
             }
         })
 
@@ -137,6 +139,13 @@ export default class TextParticle{
                 .name('z')
                 .min(400)
                 .max(500)
+                .step(0.001)
+                
+            this.debugFolder
+                .add(this.materialShader.uniforms.uAngle, 'value')
+                .name('angle')
+                .min(0)
+                .max(Math.PI * 2)
                 .step(0.001)
         }
         for (const meshEntry of meshesArray)
@@ -183,11 +192,12 @@ export default class TextParticle{
 
     triggerMorph()
     {
-        this.meshIdx++
+        
+        console.log((this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length)
         this.particles.setAttribute('position', new THREE.BufferAttribute(this.meshesArray[(this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
         this.particles.setAttribute(`aNewPosition`, new THREE.BufferAttribute(this.meshesArray[((this.meshIdx +1) % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
         this.animationParams.startTime = this.time.elapsedTime
-
+        this.meshIdx++
     }
 
     setupAnimation()
