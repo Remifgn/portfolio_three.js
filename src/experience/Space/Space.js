@@ -47,9 +47,9 @@ export default class Space{
     }
     update()
     {
-        if(this.satelite)
+        if(this.satellite)
         {
-            this.satelite.update()
+            this.satellite.update()
         }
         if(this.textParticle)
         {
