@@ -67,15 +67,7 @@ export default class Satellite{
         }
         //this.model.rotation.z = Math.Pi * 0.5
 
-        this.model.traverse((child) =>
-        {
-            if(child instanceof THREE.Mesh)
-            {
-                child.name = 'satellite'
-                this.experience.objectToTest.push(child)
-            }
-        })
-        console.log(this.experience.objectToTest)
+
 
 
         this.scene.add(this.model)
@@ -85,6 +77,18 @@ export default class Satellite{
             if(child instanceof THREE.Mesh)
             {
                 child.castShadow = true
+            }
+        })
+    }
+
+    addToObjectToTest()
+    {
+        this.model.traverse((child) =>
+        {
+            if(child instanceof THREE.Mesh)
+            {
+                child.name = 'satellite'
+                this.experience.objectToTest.push(child)
             }
         })
     }

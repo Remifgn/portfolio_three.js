@@ -115,14 +115,14 @@ export default class Camera{
             this.cam = true
         }
 
-        this.camAngle.space = () =>
+        this.camAngle.spaceLocked = () =>
         {
-            this.instance.position.set(-389, -224, 488)
-            this.instance.rotation.set(0.23, -0.44, 0.104)
+            this.instance.position.set(-383, -223, 489)
+            this.instance.rotation.set(0.1719, -0.2788, 0.0477)
             this.controls.target.set(-350, -205, 410)
-            this.controls.enableZoom = true
-            this.controls.enablePan = true
-            this.controls.enableRotate = true
+            this.controls.enableZoom = false
+            this.controls.enablePan = false
+            this.controls.enableRotate = false
             this.controls.maxDistance = 90
             this.controls.minDistance = 0
             // this.controls.minAzimuthAngle = -1.14
@@ -133,6 +133,27 @@ export default class Camera{
             this.controls.maxAzimuthAngle = Math.PI * 1.999
             this.controls.minPolarAngle = 0
             this.controls.maxPolarAngle = Math.PI
+        }
+        this.camAngle.spaceUnlocked = () =>
+        {
+            this.camAngle.enabled = 'spaceUnlocked'
+            this.controls.enableDamping = true
+            this.instance.position.set(-383, -223, 489)
+            this.instance.rotation.set(0.1719, -0.2788, 0.0477)
+            this.controls.target.set(-350, -205, 410)
+            this.controls.enableZoom = true
+            this.controls.enablePan = false
+            this.controls.enableRotate = true
+            this.controls.maxDistance = 150
+            this.controls.minDistance = 20
+            this.controls.minAzimuthAngle = -1.14
+            this.controls.maxAzimuthAngle = -0.27
+            this.controls.minPolarAngle = 1.61
+            this.controls.maxPolarAngle = 2.22
+            // this.controls.minAzimuthAngle = 0
+            // this.controls.maxAzimuthAngle = Math.PI * 1.999
+            // this.controls.minPolarAngle = 0
+            // this.controls.maxPolarAngle = Math.PI
         }
 
         this.camAngle.default = () =>
