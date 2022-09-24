@@ -90,7 +90,7 @@ export default class TextParticle{
         // Options
         this.particleSystemParams = {}
 
-        this.particleSystemParams.count = 60000
+        this.particleSystemParams.count = 6000
         this.particleSystemParams.particleSize = 300
         this.particleSystemParams.defaultAnimationSpeed = 1
         this.particleSystemParams.morphAnimationSpeed = 18
@@ -140,7 +140,7 @@ export default class TextParticle{
                 .min(400)
                 .max(500)
                 .step(0.001)
-                
+
             this.debugFolder
                 .add(this.materialShader.uniforms.uAngle, 'value')
                 .name('angle')
@@ -192,7 +192,7 @@ export default class TextParticle{
 
     triggerMorph()
     {
-        
+
         console.log((this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length)
         this.particles.setAttribute('position', new THREE.BufferAttribute(this.meshesArray[(this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
         this.particles.setAttribute(`aNewPosition`, new THREE.BufferAttribute(this.meshesArray[((this.meshIdx +1) % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))

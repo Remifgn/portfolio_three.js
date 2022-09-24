@@ -44,7 +44,7 @@ void main()
         * Size
     */
     float strength = distance(pointCoordonates, uOrigin);
-    gl_PointSize = clamp(uSize * aScale * strength * 0.25 * (sin(uTime + random(currentPosition.xy) * 2.0 * PI ) + 1.0) * 0.001, 10.0, 100.0);
+    gl_PointSize = clamp(uSize * aScale * strength * 0.25 * (sin(uTime + random(currentPosition.xy) * 2.0 * PI ) + 1.0) * 0.001, 10.0, 30.0);
     //(abs(sin(uTime)) + 0.5) * 10.0;
 
     //gl_PointSize *= (1.0 / - viewPosition.z);

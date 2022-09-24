@@ -244,7 +244,7 @@ export default class LogoParticle
     {
         if(this.morphed)
         {
-            this.materialShader.uniforms.uRotationSpeed.value = 0.01
+            this.materialShader.uniforms.uRotationSpeed.value = 0.0
         }
         else
         {
