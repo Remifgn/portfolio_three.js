@@ -3,8 +3,8 @@ import * as THREE from 'three'
 import Experience from '../Experience.js'
 import {TextGeometry} from 'three/examples/jsm/geometries/TextGeometry.js'
 import { MeshSurfaceSampler } from 'three/examples/jsm/math/MeshSurfaceSampler.js'
-import logosVertexShader from '../../shaders/logos/vertex.glsl'
-import logosFragmentShader from '../../shaders/logos/fragment.glsl'
+import textVertexShader from '../../shaders/text/vertex.glsl'
+import textFragmentShader from '../../shaders/text/fragment.glsl'
 
 export default class TextParticle{
     constructor()
@@ -102,8 +102,8 @@ export default class TextParticle{
             depthWrite: false,
             blending: THREE.AdditiveBlending,
             vertexColors: true,
-            vertexShader: logosVertexShader,
-            fragmentShader: logosFragmentShader,
+            vertexShader: textVertexShader,
+            fragmentShader: textFragmentShader,
             side: THREE.DoubleSide,
             uniforms: {
                 uSize: {value: this.particleSystemParams.particleSize * this.sizes.pixelRatio},
@@ -139,10 +139,8 @@ export default class TextParticle{
                 .max(500)
                 .step(0.001)
         }
-        console.log(meshesArray)
         for (const meshEntry of meshesArray)
         {
-            console.log(meshEntry)
             // Particle Geometry
             this.particles = new THREE.BufferGeometry()
             meshEntry.points = new Float32Array (this.particleSystemParams.count * 3)
@@ -169,7 +167,8 @@ export default class TextParticle{
 
         this.particles.setAttribute('aScale', new THREE.BufferAttribute(this.scales, 1))
         //this.particles.setAttribute('color', new THREE.BufferAttribute(colors, 3))
-
+        this.particles.setAttribute('position', new THREE.BufferAttribute(this.meshesArray[0].points, 3))
+        this.particles.setAttribute('aNewPosition', new THREE.BufferAttribute(this.meshesArray[0].points, 3))
 
 
         this.particlesPoints = new THREE.Points(this.particles, this.materialShader)
@@ -179,7 +178,6 @@ export default class TextParticle{
 
 
         this.scene.add(this.particlesPoints)
-        console.log(this.particlesPoints)
 
     }
 
@@ -260,7 +258,7 @@ export default class TextParticle{
         this.materialShader.uniforms.uTime.value = this.time.elapsedTime * 0.001
         // console.log(Math.sin(this.materialShader.uniforms.uTime.value)+1)
 
-        if( this.animationParams.startTime + this.animationParams.transitionTime > this.time.elapsedTime)
+        if( this.animationParams.startTime + this.animationParams.transitionTime + this.time.delta > this.time.elapsedTime)
         {
             this.materialShader.uniforms.uMix.value = (this.time.elapsedTime - this.animationParams.startTime) / this.animationParams.transitionTime
         }

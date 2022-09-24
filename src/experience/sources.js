@@ -93,7 +93,7 @@ export default [
     {
         name: 'satelliteModel',
         type: 'gltfModel',
-        path: 'models/satellite/satellite.glb',
+        path: 'models/satellite/satelite.glb',
     },
     {
         name: 'planetModel',
@@ -110,5 +110,11 @@ export default [
         type: 'jsonFont',
         path: 'fonts/helvetiker_regular.typeface.json',
     },
+    {
+        name: 'logosModel',
+        type: 'gltfModel',
+        path: 'models/logos/logos.glb',
+    },
+
 
 ]

@@ -28,10 +28,10 @@ void main()
 
     modelPosition.xyz = mix(currentPosition, aNewPosition, clamp(uMix, 0.0, 1.0));
 
-    float new_x = modelPosition.x*cos(uTime * uRotationSpeed) - modelPosition.z*sin(uTime * uRotationSpeed);
-    float new_z = modelPosition.z*cos(uTime * uRotationSpeed) + modelPosition.x*sin(uTime * uRotationSpeed);
+    // float new_x = modelPosition.x*cos(uTime * uRotationSpeed) - modelPosition.z*sin(uTime * uRotationSpeed);
+    // float new_z = modelPosition.z*cos(uTime * uRotationSpeed) + modelPosition.x*sin(uTime * uRotationSpeed);
 
-    vec3 pointCoordonates = vec3(new_x, modelPosition.y, new_z) + uOrigin;
+    vec3 pointCoordonates = vec3(modelPosition) + uOrigin;
     vec4 viewPosition =  viewMatrix * (vec4(pointCoordonates, 1));
     // vec4 viewPosition =  viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;

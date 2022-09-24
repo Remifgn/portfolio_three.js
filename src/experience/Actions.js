@@ -39,6 +39,7 @@ export default class Actions{
     setActions()
     {
         this.actions = {}
+        this.actions.satelliteClicks = 0
         this.actions.default = () =>
         {
             this.camera.camAngle.space()
@@ -60,6 +61,39 @@ export default class Actions{
             this.world.woodCabin = new WoodCabin()
             this.camera.transitions.default(2)
             this.camera.camAngle.default()
+        }
+
+        this.actions.satellite = () =>
+        {
+            console.log('satellite')
+
+            switch (this.actions.satelliteClicks)
+            {
+                case 0:
+                    this.space.textParticle.triggerMorph()
+                  break;
+                case 1:
+                    this.space.blenderParticle.triggerMorph()
+                  break;
+                case 2:
+                    this.space.pythonParticle.triggerMorph()
+                  break;
+                case 3:
+                    this.space.gitParticle.triggerMorph()
+                  break;
+                case 4:
+                    this.space.cParticle.triggerMorph()
+                  break;
+                case 5:
+                    this.space.jsParticle.triggerMorph()
+                  break;
+                case 6:
+                    this.space.htmlParticle.triggerMorph()
+                  break;
+              }
+            console.log(this.actions.satelliteClicks)
+            this.actions.satelliteClicks++
+
         }
 
         this.actions.insa_logo = () =>
@@ -95,6 +129,12 @@ export default class Actions{
         this.actions.particleMorph = () =>
         {
             this.space.textParticle.triggerMorph()
+            this.space.blenderParticle.triggerMorph()
+            this.space.pythonParticle.triggerMorph()
+            this.space.gitParticle.triggerMorph()
+            this.space.cParticle.triggerMorph()
+            this.space.jsParticle.triggerMorph()
+            this.space.htmlParticle.triggerMorph()
         }
 
     }
@@ -104,7 +144,6 @@ export default class Actions{
         this.mouse.on('click', () =>
         {
             this.raycaster.testMouseClick()
-            this.actions.particleMorph()
         })
 
         this.raycaster.on('clickOnObject', () =>
@@ -112,7 +151,7 @@ export default class Actions{
             const actionName = this.raycaster.currentIntersect.object.name
 
             const string = 'this.actions.' + actionName + '()'
-            console.log(string)
+
             eval(string)
             // this.actions.sign2()
         })

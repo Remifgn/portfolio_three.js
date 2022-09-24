@@ -44,6 +44,7 @@ export default class Raycaster extends EventEmitter{
     {
         if(this.currentIntersect)
         {
+            console.log('click')
             this.trigger('clickOnObject')
         }
     }
