@@ -20,6 +20,7 @@ export default class Space{
         this.ressources.on('ready', () =>
         {
             this.environment = new SpaceEnvironment()
+            this.planet = new Planet()
 
             this.satellite = new Satellite()
 
@@ -38,7 +39,7 @@ export default class Space{
             const htmlPosition = new THREE.Vector3(-363, -220, 400)
             this.htmlParticle = new LogoParticle('html', htmlPosition)
 
-            this.planet = new Planet()
+
 
 
 
@@ -47,6 +48,10 @@ export default class Space{
     }
     update()
     {
+        if(this.planet)
+        {
+            this.planet.update()
+        }
         if(this.satellite)
         {
             this.satellite.update()

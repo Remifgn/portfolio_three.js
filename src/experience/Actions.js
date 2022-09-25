@@ -27,7 +27,6 @@ export default class Actions{
             const selectedObjects = []
             selectedObjects.push( this.raycaster.currentIntersect.object )
             this.postprocessing.outlinePass.selectedObjects = selectedObjects
-            console.log(selectedObjects)
 
         })
         this.raycaster.on('hoverObjectLeave', () =>
@@ -43,7 +42,7 @@ export default class Actions{
         this.actions.textClicks = 0
         this.actions.default = () =>
         {
-            this.camera.camAngle.spaceLocked()
+            this.camera.camAngle.spaceUnlocked()
         }
 
         this.actions.sign1 = () =>
@@ -86,6 +85,9 @@ export default class Actions{
                   break;
                 case 5:
                     this.space.htmlParticle.triggerMorph()
+                  break;
+                case 6:
+                    this.space.satellite.moveToOrbit()
                   break;
               }
             this.actions.satelliteClicks++
@@ -135,7 +137,7 @@ export default class Actions{
                     this.camera.camAngle.spaceUnlocked()
                 }
                 this.space.satellite.addToObjectToTest()
-                
+
             }
             this.actions.textClicks++
         }

@@ -41,19 +41,25 @@ export default class Experience{
         this.time = new Time()
         this.scene = new THREE.Scene()
         this.ressources = new Ressources(sources)
-        this.camera = new Camera()
-        this.camcontrols = new CamControls()
+
+
         this.mouse = new Mouse()
 
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []
         //this.world = new World()
         this.space = new Space()
+        this.camera = new Camera()
+        this.camcontrols = new CamControls()
         this.renderer = new Renderer()
         this.raycaster = new Raycaster(this.objectToTest)
         this.postprocessing = new PostProcessing()
         this.actions = new Actions()
-        this.actions.actions.default()
+        this.ressources.on('ready', () =>
+        {
+            this.actions.actions.default()
+        })
+
 
         // Sizes resize event
         this.sizes.on('resize', () =>

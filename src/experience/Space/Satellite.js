@@ -1,14 +1,17 @@
 import * as THREE from 'three'
 import Experience from "../Experience.js"
+import gsap from "gsap"
 
 export default class Satellite{
     constructor()
     {
         this.experience = new Experience()
+        this.space = this.experience.space
         this.scene = this.experience.scene
         this.ressources= this.experience.ressources
         this.time = this.experience.time
         this.debug = this.experience.debug
+        this.camera = this.experience.camera
 
         //Debug
         if (this.debug.active)
@@ -21,6 +24,7 @@ export default class Satellite{
 
 
         this.setModel()
+        this.setOrbitRotate()
         //this.setMaterial()
         this.update()
     }
@@ -32,18 +36,14 @@ export default class Satellite{
         this.ressource.scene.rotation.set(-1.122, 0, -0.813)
         this.model = this.ressource.scene
         this.model.rotation.reorder('XZY')
+        this.pivot = new THREE.Object3D()
+        this.scene.add(this.pivot)
 
 
 
 
         if(this.debugFolder)
         {
-            this.arrowHelper = () =>
-            {
-                this.scene.remove(this.helper)
-                this.helper = new THREE.ArrowHelper( this.rotAnimAngle, this.ressource.scene.position, this.rotAnimAngle.length() * 5, 0xff0000 )
-                this.scene.add(this.helper)
-            }
             this.debugObject = {}
             this.debugObject.angle = 0
             this.debugFolder
@@ -122,6 +122,63 @@ export default class Satellite{
 
     }
 
+    moveToOrbit()
+    {
+
+        gsap.to(this.ressource.scene.position, { duration: 10, ease: "power1.in",
+            x: 0,
+            y: -10,
+            z: 50,
+            onComplete:this.orbitRotate
+        })
+        gsap.to(this.camera.controls, { duration: 2, ease: "power1.inOut",
+            maxDistance: 35
+        })
+
+
+    }
+
+    setOrbitRotate()
+    {
+
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .add(this.pivot.rotation, 'y')
+                .name('orbit y rot')
+                .min(- Math.PI)
+                .max(Math.PI)
+                .step(0.0001)
+            this.debugFolder
+                .add(this.pivot.rotation, 'x')
+                .name('orbit x rot')
+                .min(- Math.PI)
+                .max(Math.PI)
+                .step(0.0001)
+            this.debugFolder
+                .add(this.pivot.rotation, 'z')
+                .name('orbit z rot')
+                .min(- Math.PI)
+                .max(Math.PI)
+                .step(0.0001)
+
+        }
+        this.orbitRotate = () =>
+        {
+            this.scene.remove(this.model)
+            // this.model.position.set(0, 0, 0)
+
+            // this.model.position.x = 50
+            this.pivot.add(this.model)
+            this.camera.transitions.planet(2)
+            this.orbiting = true
+
+        }
+
+    }
+
+
+
     destroy()
     {
         this.model.traverse((child) =>
@@ -138,7 +195,13 @@ export default class Satellite{
 
     update()
     {
+
         this.model.rotation.y =  (this.time.elapsedTime * 0.0001) % Math.PI*2
+        if(this.orbiting)
+        {
+            this.pivot.rotation.y += Math.PI / (180 * 10)
+        }
+        //
     }
 
 

@@ -193,7 +193,7 @@ export default class TextParticle{
     triggerMorph()
     {
 
-        console.log((this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length)
+        // console.log((this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length)
         this.particles.setAttribute('position', new THREE.BufferAttribute(this.meshesArray[(this.meshIdx % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
         this.particles.setAttribute(`aNewPosition`, new THREE.BufferAttribute(this.meshesArray[((this.meshIdx +1) % this.meshesArray.length + this.meshesArray.length) % this.meshesArray.length].points, 3))
         this.animationParams.startTime = this.time.elapsedTime

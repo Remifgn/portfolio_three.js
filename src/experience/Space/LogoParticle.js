@@ -26,7 +26,6 @@ export default class LogoParticle
             this.debugFolder= this.debug.ui.addFolder('LogoParticle' + logoName)
         }
         this.ressource = this.ressources.items.logosModel
-        console.log(this.ressource)
 
         this.instance = {}
         this.morphed = true
@@ -137,15 +136,12 @@ export default class LogoParticle
         }
         let childrenNumber =  1
         let meshLogo = []
-        console.log(this.instance.meshList)
         meshLogo[0] = this.instance.meshList
-        console.log(meshLogo)
 
         if(this.instance.meshList.children.length)
         {
             childrenNumber =  this.instance.meshList.children.length
             meshLogo = this.instance.meshList.children
-            console.log(this.instance.meshList.children)
         }
 
         this.instance.children = []
@@ -153,10 +149,8 @@ export default class LogoParticle
         {
 
             const child = {}
-            console.log(materialMesh)
             // Particle Geometry
             const particles = new THREE.BufferGeometry()
-            // console.log((this.particleSystemParams.count / this.instance.meshList.children.length) * 3)
             const points = new Float32Array ((this.particleSystemParams.count / childrenNumber) * 3)
             const colors = new Float32Array ((this.particleSystemParams.count / childrenNumber) * 3)
             this.scales = new Float32Array(this.particleSystemParams.count / childrenNumber * 1)

@@ -10,6 +10,7 @@ export default class Camera{
     constructor()
     {
         this.experience = new Experience()
+        this.space = this.experience.space
         this.sizes = this.experience.sizes
         this.canvas = this.experience.canvas
         this.scene = this.experience.scene
@@ -52,6 +53,7 @@ export default class Camera{
         this.controls.target.z = -1
         this.controls.enableRotate = true
         this.controls.enableZoom = true
+        this.controls.saveState()
     }
 
     setTransitions()
@@ -95,6 +97,35 @@ export default class Camera{
             // this.controls.enableRotate = true
             this.controls.enableZoom = true
         }
+
+        this.transitions.planet = async (duration) =>
+        {
+            this.controls.target = this.controls.target.clone()
+
+            gsap.to(this.controls.target, { duration: duration, ease: "power1.inOut",
+            x: 0,
+            y: 0,
+            z: 0,
+            onComplete: this.camAngle.unlocked
+            })
+            gsap.to(this.controls, { duration: duration, ease: "power1.inOut",
+            minDistance: 191
+            })
+            gsap.to(this.instance.position , { duration: duration, ease: "power1.inOut",
+            x: 3,
+            y: -4,
+            z: 191,
+            })
+            gsap.to(this.instance.rotation , { duration: duration, ease: "power1.inOut",
+            x: -0.07,
+            y: 0,
+            z: 0,
+            })
+
+            await this.sleep(1500)
+            // this.controls.enableRotate = true
+            this.controls.enableZoom = true
+        }
     }
 
     setCamAngle()
@@ -104,14 +135,14 @@ export default class Camera{
 
         this.camAngle.unlocked = () =>
         {
+            console.log('ping')
+            // this.controls.reset()
+
             this.controls.enableZoom = true
             this.controls.enablePan = true
+            this.controls.enableRotate = true
             this.controls.maxDistance = 1000
-            this.controls.minDistance = 0
-            this.controls.minAzimuthAngle = 0
-            this.controls.maxAzimuthAngle = - Math.PI * 1.999
-            this.controls.minPolarAngle = 0
-            this.controls.maxPolarAngle = Math.PI
+            // this.controls.autoRotate = true
             this.cam = true
         }
 
@@ -140,20 +171,20 @@ export default class Camera{
             this.controls.enableDamping = true
             this.instance.position.set(-383, -223, 489)
             this.instance.rotation.set(0.1719, -0.2788, 0.0477)
-            this.controls.target.set(-350, -205, 410)
+            this.controls.target = this.space.satellite.model.position
             this.controls.enableZoom = true
             this.controls.enablePan = false
             this.controls.enableRotate = true
             this.controls.maxDistance = 150
             this.controls.minDistance = 20
-            this.controls.minAzimuthAngle = -1.14
-            this.controls.maxAzimuthAngle = -0.27
-            this.controls.minPolarAngle = 1.61
-            this.controls.maxPolarAngle = 2.22
-            // this.controls.minAzimuthAngle = 0
-            // this.controls.maxAzimuthAngle = Math.PI * 1.999
-            // this.controls.minPolarAngle = 0
-            // this.controls.maxPolarAngle = Math.PI
+            // this.controls.minAzimuthAngle = -1.14
+            // this.controls.maxAzimuthAngle = -0.27
+            // this.controls.minPolarAngle = 1.61
+            // this.controls.maxPolarAngle = 2.22
+            this.controls.minAzimuthAngle = 0
+            this.controls.maxAzimuthAngle = Math.PI * 1.999
+            this.controls.minPolarAngle = 0
+            this.controls.maxPolarAngle = Math.PI
         }
 
         this.camAngle.default = () =>

@@ -34,7 +34,7 @@ export default class Planet{
         {
             if(child instanceof THREE.Mesh)
             {
-                child.castShadow = false
+                child.castShadow = true
             }
         })
     }
@@ -55,6 +55,11 @@ export default class Planet{
 
     }
 
+    animateRotation()
+    {
+        this.model.rotation.y += Math.PI / (180 * 60)
+    }
+
     destroy()
     {
         this.model.traverse((child) =>
@@ -71,6 +76,7 @@ export default class Planet{
 
     update()
     {
+        this.animateRotation()
     }
 
 

@@ -93,7 +93,7 @@ export default [
     {
         name: 'satelliteModel',
         type: 'gltfModel',
-        path: 'models/satellite/satelite.glb',
+        path: 'models/satellite/satelite2.glb',
     },
     {
         name: 'planetModel',
