@@ -6,6 +6,7 @@ import Camera from './Camera.js'
 import Renderer from './Renderer.js'
 import World from './World/World.js'
 import Ressources from './utils/Ressources.js'
+import LoadingDisplay from './LoadingDisplay.js'
 import sources from './sources.js'
 import Debug from './utils/Debug.js'
 import Mouse from './utils/Mouse.js'
@@ -41,6 +42,7 @@ export default class Experience{
         this.time = new Time()
         this.scene = new THREE.Scene()
         this.ressources = new Ressources(sources)
+        this.loadingDisplay = new LoadingDisplay()
 
 
         this.mouse = new Mouse()
