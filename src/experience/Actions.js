@@ -88,6 +88,7 @@ export default class Actions{
                   break;
                 case 6:
                     this.space.satellite.moveToOrbit()
+                    this.space.destroyLogoParticles()
                   break;
               }
             this.actions.satelliteClicks++

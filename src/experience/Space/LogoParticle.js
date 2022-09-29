@@ -259,4 +259,29 @@ export default class LogoParticle
             this.morphed = false
         }
     }
+
+    destroy()
+    {
+
+        this.animationParams.startTime = this.time.elapsedTime
+        // console.log(this.instance.children)
+        for(let child of this.instance.children)
+        {
+            child.bufferGeometry.setAttribute('position', new THREE.BufferAttribute(child.logoPositions, 3))
+            child.bufferGeometry.setAttribute('aNewPosition', new THREE.BufferAttribute(child.spherePositions, 3))
+            // console.log(child.particlePoints)
+        }
+
+        this.morphed = true
+        setTimeout(() => {
+            for(let child of this.instance.children)
+            {
+                this.scene.remove(child.particlePoints)
+                child.bufferGeometry.dispose()
+            }
+            this.materialShader.dispose()
+        }, 1000);
+
+
+    }
 }

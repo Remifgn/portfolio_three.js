@@ -25,7 +25,6 @@ export default class Space{
             this.satellite = new Satellite()
 
             this.textParticle = new TextParticle()
-
             const blenderPosition = new THREE.Vector3(-390, -208, 400)
             this.blenderParticle = new LogoParticle('blender', blenderPosition)
             const pythonPosition = new THREE.Vector3(-376, -208, 400)
@@ -38,54 +37,33 @@ export default class Space{
             this.jsParticle = new LogoParticle('js', jsPosition)
             const htmlPosition = new THREE.Vector3(-363, -220, 400)
             this.htmlParticle = new LogoParticle('html', htmlPosition)
-
-
-
-
-
         })
 
     }
+
+    destroyLogoParticles()
+    {
+        this.blenderParticle.destroy()
+        this.pythonParticle.destroy()
+        this.gitParticle.destroy()
+        this.cParticle.destroy()
+        this.jsParticle.destroy()
+        this.htmlParticle.destroy()
+    }
+
     update()
     {
-        if(this.planet)
-        {
-            this.planet.update()
-        }
-        if(this.satellite)
-        {
-            this.satellite.update()
-        }
-        if(this.textParticle)
-        {
-            this.textParticle.update()
-        }
-        if(this.blenderParticle)
-        {
-            this.blenderParticle.update()
-        }
-        if(this.pythonParticle)
-        {
-            this.pythonParticle.update()
-        }
-        if(this.gitParticle)
-        {
-            this.gitParticle.update()
-        }
-        if(this.cParticle)
-        {
-            this.cParticle.update()
-        }
-        if(this.jsParticle)
-        {
-            this.jsParticle.update()
-        }
         if(this.htmlParticle)
         {
+            this.planet.update()
+            this.satellite.update()
+            this.textParticle.update()
+            this.blenderParticle.update()
+            this.pythonParticle.update()
+            this.gitParticle.update()
+            this.cParticle.update()
+            this.jsParticle.update()
             this.htmlParticle.update()
         }
-
-
-
     }
 }
