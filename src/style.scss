@@ -6,10 +6,6 @@
 
 html,
 
-:root
-{
-    --direction: -45deg;
-}
 
 
 body {
@@ -139,3 +135,143 @@ body {
       transform: rotateX(65deg) rotateZ(360deg) scale(1.7);
     }
   }
+
+
+  /* CONSOLE TYPEWRITTER  */
+
+.dot.visible
+  {
+    opacity: 0.9
+  }
+
+// /* Toggled State */
+// input[type=checkbox]:checked ~ .terminal
+// {
+//   display: none;
+// }
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  display: grid;
+  place-content: center;
+}
+
+.terminal.visible
+{
+  display: block;
+}
+
+.terminal
+{
+  display: none;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  padding: 20px;
+  border-radius: 4px;
+  border: 1px solid #ffffff77;
+  color: #ffffff;
+  font: 1.3rem Inconsolata, monospace;
+  font-size: 24px;
+  background:
+  radial-gradient(rgba(0, 150, 0, 0.75), black 120%),
+  repeating-linear-gradient(0deg, #000000 0%, #ffffff 1%);
+}
+
+input[type="button"]{
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: #fff;
+  /* Not removed via appearance */
+  margin: 0;
+  display: grid;
+  place-content: center;
+
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 50%;
+  background-color: #04AA6D;
+  color: white;
+}
+
+input[type="button"]:hover {
+  background-color: #ddd;
+  color: black;
+  cursor: pointer;
+}
+
+.cursor::after
+{
+    content:'';
+    height:24px;
+    width:13px;
+    display:inline-block;
+    margin-left:0px;
+    background-color:white;
+    animation-name:blink;
+    animation-duration:0.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    0% {
+      opacity:1;
+    }
+    49% {
+      opacity:1;
+    }
+    50% {
+      opacity:0;
+    }
+    100% {
+      opacity:0;
+    }
+  }
+
+  // Point of interest
+$dot-size: 20px;
+$dot-color: #07c60d;
+
+
+
+.dot
+{
+  position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate3d(-50%, -50%, 0);
+	width: $dot-size;
+	height: $dot-size;
+	background: radial-gradient($dot-color, darken($dot-color, 30%));
+	border-radius: 50%;
+	box-shadow: 0 0 0 3px #fff, 0 0 5px 8px rgba(0, 0, 0, .2);
+	animation: breath 1.6s ease-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: pointer;
+}
+
+@keyframes breath
+{
+	0%
+		{
+      transform: scale(1);
+    }
+	50%
+		{
+      transform: scale(1.2);
+    }
+	100%
+		{
+      transform: scale(1);
+    }
+}

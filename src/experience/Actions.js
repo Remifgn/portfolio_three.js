@@ -6,17 +6,24 @@ export default class Actions{
     constructor()
     {
         this.experience = new Experience()
-        this.raycaster = this.experience.raycaster
-        this.postprocessing = this.experience.postprocessing
-        this.mouse = this.experience.mouse
-        this.world = this.experience.world
-        this.space = this.experience.space
-        this.camera = this.experience.camera
-        this.camControls = this.experience.camcontrols
+        this.ressources = this.experience.ressources
+        this.ressources.on('ready', () =>
+        {
 
-        this.setActions()
-        this.setActionOnHover()
-        this.setActionOnClick()
+            this.raycaster = this.experience.raycaster
+            this.postprocessing = this.experience.postprocessing
+            this.mouse = this.experience.mouse
+            this.world = this.experience.world
+            this.space = this.experience.space
+            this.camera = this.experience.camera
+            this.camControls = this.experience.camcontrols
+            console.log(this.space)
+            this.satellite = this.space.satellite
+
+            this.setActions()
+            this.setActionOnHover()
+            this.setActionOnClick()
+        })
 
     }
 
@@ -88,6 +95,9 @@ export default class Actions{
                   break;
                 case 6:
                     this.space.satellite.moveToOrbit()
+                    this.space.satellite.hidePoint()
+                    this.space.satellite.hideTerminal()
+
                     this.space.destroyLogoParticles()
                   break;
               }
@@ -127,17 +137,23 @@ export default class Actions{
 
         this.actions.welcome = () =>
         {
-            if (this.actions.textClicks <= this.space.textParticle.textContent.length)
+            if (this.actions.textClicks < this.space.textParticle.textContent.length)
             {
                 this.space.textParticle.triggerMorph()
             }
-            else
+            else if(this.actions.textClicks == this.space.textParticle.textContent.length )
             {
                 if(this.camera.camAngle.enabled !== 'spaceUnlocked')
                 {
                     this.camera.camAngle.spaceUnlocked()
                 }
                 this.space.satellite.addToObjectToTest()
+
+                this.space.textParticle.triggerMorph()
+                setTimeout(() => {
+                    this.space.satellite.displayPoint()
+                }, 1000)
+
 
             }
             this.actions.textClicks++
