@@ -7,8 +7,22 @@
 </head>
 <body>
     <canvas class="webgl"></canvas>
-    <section class="loading-screen" >
+    <!-- <section class="loading-screen" >
         <div class="planet"></div>
-    </section>
+    </section> -->
+    <div class="dialog">
+        <input class="dot" type="checkbox" onchange="experience.space.satellite.displayTerminal()"></input>
+        <div class="terminal">
+            <p>
+                <!-- <input type="text" id="user-caption" value="Type something here!" />
+                <input type="button" id="test-typing" value="Test Typing Effect" />
+                <input type="button" id="test-erasing" value="Test Erasing Effect" /> -->
+                <input type="button" id="test-typing" value=&#8250; onclick="experience.space.satellite.terminal.typeNext()"/>
+            </p>
+            <p class="console">
+                <span>C:\</span><span id="caption"></span><span class="cursor">|</span>
+            </p>
+        </div>
+    </div>
 </body>
 </html>

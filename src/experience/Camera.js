@@ -35,7 +35,7 @@ export default class Camera{
             this.fov,
             this.sizes.width / this.sizes.height,
             0.1,
-            1000
+            1100
         )
 
         this.instance.position.set(6, 4, 8)

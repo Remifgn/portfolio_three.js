@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Experience from "../Experience.js"
 import gsap from "gsap"
+import TerminalTypeWriter from './TerminalTypeWritter.js'
 
 export default class Satellite{
     constructor()
@@ -12,6 +13,10 @@ export default class Satellite{
         this.time = this.experience.time
         this.debug = this.experience.debug
         this.camera = this.experience.camera
+        this.sizes = this.experience.sizes
+        this.raycaster = new THREE.Raycaster()
+        this.checkboxState = false
+        this.firstTerminal = true
 
         //Debug
         if (this.debug.active)
@@ -26,6 +31,8 @@ export default class Satellite{
         this.setModel()
         this.setOrbitRotate()
         //this.setMaterial()
+
+        this.setHtmlTerminal()
         this.update()
     }
 
@@ -177,7 +184,118 @@ export default class Satellite{
 
     }
 
+    setHtmlTerminal()
+    {
+        this.terminal = new TerminalTypeWriter()
+        /**+
+         * Points of interest
+         */
 
+        this.points = [
+            {
+                position: new THREE.Vector3(-339, -207, 410),
+                element: document.querySelector('.terminal')
+            },
+            {
+                position: this.model.position.clone(),
+                element: document.querySelector('.dot')
+            },
+        ]
+        const lineGeomerty = new THREE.BufferGeometry()
+        const linePoints = new Float32Array(6)
+        for (let i = 0 ; i < this.points.length; ++i)
+        {
+            let i3 = i*3
+            linePoints[i3 ] = this.points[i].position.x
+            linePoints[i3 + 1] = this.points[i].position.y
+            linePoints[i3 + 2] = this.points[i].position.z
+        }
+
+        lineGeomerty.setAttribute('position', new THREE.BufferAttribute(linePoints, 3))
+
+
+        this.line = new THREE.Line(lineGeomerty,
+            new THREE.LineBasicMaterial({
+                color: 0xffffff,
+                linewidth: 100,
+                linecap: 'round', //ignored by WebGLRenderer
+                linejoin:  'round' //ignored by WebGLRenderer
+            })
+        )
+
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .add(this.points[0].position, 'x')
+                .name('terminal x')
+                .min(-400)
+                .max(-300)
+                .step(0.1)
+            this.debugFolder
+                .add(this.points[0].position, 'y')
+                .name('terminal y')
+                .min(-300)
+                .max(-150)
+                .step(0.1)
+            this.debugFolder
+                .add(this.points[0].position, 'z')
+                .name('terminal z')
+                .min(300)
+                .max(500)
+                .step(0.1)
+        }
+    }
+
+    displayPoint()
+    {
+        this.points[1].element.classList.add('visible')
+    }
+    hidePoint()
+    {
+        this.points[1].element.classList.remove('visible')
+    }
+    displayTerminal()
+    {
+        this.checkboxState = ! this.checkboxState
+        console.log("onchange")
+        if(this.checkboxState)
+        {
+            this.scene.add(this.line)
+            this.points[0].element.classList.add('visible')
+        }
+        else
+        {
+            this.hideTerminal()
+        }
+        if(this.firstTerminal)
+        {
+            this.terminal.typeNext()
+            this.firstTerminal = false
+        }
+
+    }
+
+    hideTerminal()
+    {
+        this.scene.remove(this.line)
+        this.points[0].element.classList.remove('visible')
+    }
+
+    htmlOnMesh()
+    {
+        // Update points only when the scene is ready
+        // Go through each point
+        for(const point of this.points)
+        {
+            // Get 2D screen position
+            const screenPosition = point.position.clone()
+            screenPosition.project(this.camera.instance)
+
+            const translateX = screenPosition.x * this.sizes.width * 0.5
+            const translateY = - screenPosition.y * this.sizes.height * 0.5
+            point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+        }
+    }
 
     destroy()
     {
@@ -197,11 +315,11 @@ export default class Satellite{
     {
 
         this.model.rotation.y =  (this.time.elapsedTime * 0.0001) % Math.PI*2
+        this.htmlOnMesh()
         if(this.orbiting)
         {
             this.pivot.rotation.y += Math.PI / (180 * 10)
         }
-        //
     }
 
 

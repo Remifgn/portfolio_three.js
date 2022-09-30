@@ -273,4 +273,9 @@ export default class TextParticle{
             this.materialShader.uniforms.uMix.value = (this.time.elapsedTime - this.animationParams.startTime) / this.animationParams.transitionTime
         }
     }
+
+    destroy()
+    {
+
+    }
 }
