@@ -8,7 +8,7 @@ export default class TerminalTypeWriter{
 
         this.textArray = [
             "System Wakeup..... It seems that we've entered an interesting area",
-            "The probe IR telescope can be used to retrieve the skills that compose these galaxy",
+            "The probe can be used to retrieve the skills that compose these galaxies",
             "Now that we know more about this system lets explore the planet!",
             "Why couldn't the pirate finish the alphabet?|He kept getting lost a C",
             "What's brown and sticky?|A stick",

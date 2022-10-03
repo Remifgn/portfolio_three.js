@@ -18,6 +18,8 @@ export default class Planet{
 
         //Setup
         this.ressource = this.ressources.items.planetModel
+        this.pivot = this.experience.pivot
+
 
 
         this.setModel()
@@ -28,7 +30,7 @@ export default class Planet{
     setModel()
     {
         this.model = this.ressource.scene
-        this.scene.add(this.model)
+        this.pivot.add(this.model)
 
         this.model.traverse((child) =>
         {
@@ -55,10 +57,6 @@ export default class Planet{
 
     }
 
-    animateRotation()
-    {
-        this.model.rotation.y += Math.PI / (180 * 60)
-    }
 
     destroy()
     {
@@ -76,7 +74,6 @@ export default class Planet{
 
     update()
     {
-        this.animateRotation()
     }
 
 

@@ -13,7 +13,7 @@ import Mouse from './utils/Mouse.js'
 import Raycaster from './utils/Raycaster.js'
 import PostProcessing from './Postprocessing.js'
 import CamControls from './CamControls.js'
-import Actions from './Actions.js'
+import Actions from './utils/Actions.js'
 import Space from './Space/Space.js'
 
 let instance = null
@@ -49,14 +49,18 @@ export default class Experience{
 
         // !! World and raycaster must be instanciated befor raycaster
         this.objectToTest = []
-        //this.world = new World()
+        this.actions = new Actions()
+        this.pivot = new THREE.Object3D()
+        this.scene.add(this.pivot)
+        this.rotationSpeed = Math.PI / (180 * 60)
+        this.world = new World()
         this.space = new Space()
         this.camera = new Camera()
         this.camcontrols = new CamControls()
         this.renderer = new Renderer()
         this.raycaster = new Raycaster(this.objectToTest)
         this.postprocessing = new PostProcessing()
-        this.actions = new Actions()
+
         this.ressources.on('ready', () =>
         {
             this.actions.actions.default()
@@ -75,6 +79,11 @@ export default class Experience{
             this.update()
         })
 
+        this.actions.on('interiorView', () =>
+        {
+            this.rotationSpeed = 0
+        })
+
     }
 
     resize()
@@ -86,8 +95,12 @@ export default class Experience{
 
     update()
     {
+        if(this.pivot)
+        {
+            this.pivot.rotation.y += this.rotationSpeed
+        }
         this.camera.update()
-        //this.world.update()
+        this.world.update()
         this.space.update()
         this.renderer.update()
         this.raycaster.testMouseRay()

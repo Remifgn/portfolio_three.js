@@ -10,6 +10,7 @@ export default class Interior{
         this.ressources= this.experience.ressources
         this.time = this.experience.time
         this.debug = this.experience.debug
+        this.pivot = this.experience.world.pivot
 
         //Debug
         if (this.debug.active)
@@ -24,15 +25,24 @@ export default class Interior{
 
         this.setModel()
         this.setMaterial()
-        this.createSign()
         this.update()
     }
 
     setModel()
     {
+        this.modelParams = {
+            scale: 1.141,
+            xPosition: -0.226,
+            yPosition: 1.299,
+            zPosition: 1.299,
+            xRotation: 0.124
+        }
+
         this.modelStructure = this.ressource_sturcture.scene
-        this.modelStructure.scale.set(0.2, 0.2, 0.2)
-        this.scene.add(this.modelStructure)
+        this.modelStructure.scale.set(this.modelParams.scale, this.modelParams.scale, this.modelParams.scale)
+        this.modelStructure.position.set(this.modelParams.xPosition, this.modelParams.yPosition, this.modelParams.zPosition)
+        this.modelStructure.rotation.x = this.modelParams.xRotation
+        this.pivot.add(this.modelStructure)
 
         this.modelObjects = this.ressource_objects.scene
         this.logos = []
@@ -60,8 +70,73 @@ export default class Interior{
         console.log(this.experience.objectToTest)
 
 
-        this.modelObjects.scale.set(0.2, 0.2, 0.2)
-        this.scene.add(this.modelObjects)
+        this.modelObjects.scale.set(this.modelParams.scale, this.modelParams.scale, this.modelParams.scale)
+        this.modelObjects.position.set(this.modelParams.xPosition, this.modelParams.yPosition, this.modelParams.zPosition)
+        this.modelObjects.rotation.x = this.modelParams.xRotation
+
+        this.pivot.add(this.modelObjects)
+
+        if(this.debug.active)
+        {
+            this.debugFolder
+                .add(this.modelParams,'scale')
+                .name('cabin scale')
+                .min(0)
+                .max(2)
+                .step(0.001)
+                .onChange(() =>
+                {
+                    this.modelStructure.scale.set(this.modelParams.scale, this.modelParams.scale, this.modelParams.scale)
+                    this.modelObjects.scale.set(this.modelParams.scale, this.modelParams.scale, this.modelParams.scale)
+                })
+            this.debugFolder
+                .add(this.modelParams, 'xPosition')
+                .name('cabin x')
+                .min(-20)
+                .max(20)
+                .step(0.001)
+                .onChange(() =>
+                {
+                    this.modelStructure.position.x = this.modelParams.xPosition
+                    this.modelObjects.position.x = this.modelParams.xPosition
+                })
+            this.debugFolder
+                .add(this.modelParams, 'yPosition')
+                .name('cabin y')
+                .min(-20)
+                .max(20)
+                .step(0.001)
+                .onChange(() =>
+                {
+                    this.modelStructure.position.y = this.modelParams.yPosition
+                    this.modelObjects.position.y = this.modelParams.yPosition
+                })
+            this.debugFolder
+                .add(this.modelParams, 'zPosition')
+                .name('cabin z')
+                .min(-20)
+                .max(20)
+                .step(0.001)
+                .onChange(() =>
+                {
+                    this.modelStructure.position.z = this.modelParams.zPosition
+                    this.modelObjects.position.z = this.modelParams.zPosition
+                })
+            this.debugFolder
+                .add(this.modelParams, 'xRotation')
+                .name('x rot')
+                .min(-Math.PI)
+                .max(Math.PI)
+                .step(0.001)
+                .onChange(() =>
+                {
+                    this.modelStructure.rotation.x = this.modelParams.xRotation
+                    this.modelObjects.rotation.x = this.modelParams.xRotation
+                })
+
+        }
+
+
 
         this.modelObjects.traverse((child) =>
         {
@@ -106,15 +181,15 @@ export default class Interior{
         })
     }
 
-    createSign()
-    {
-        const sign2Params = {}
-        sign2Params.name = 'sign2'
-        sign2Params.cameraPosition = new THREE.Vector3(-2.166, 1.73, 0.11)
-        sign2Params.position = new THREE.Vector3(0, 0.5 , -0.5)
-        sign2Params.rotation = new THREE.Vector3(0, Math.PI * 1.5 , 0)
-        this.sign2 = new Sign(sign2Params)
-    }
+    // createSign()
+    // {
+    //     const sign2Params = {}
+    //     sign2Params.name = 'sign2'
+    //     sign2Params.cameraPosition = new THREE.Vector3(-2.166, 1.73, 0.11)
+    //     sign2Params.position = new THREE.Vector3(0, 0.5 , -0.5)
+    //     sign2Params.rotation = new THREE.Vector3(0, Math.PI * 1.5 , 0)
+    //     this.sign2 = new Sign(sign2Params)
+    // }
 
     destroy()
     {

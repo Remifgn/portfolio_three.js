@@ -1,15 +1,16 @@
-import Experience from "./Experience"
-import WoodCabin from "./World/WoodCabin"
-import Interior from "./World/Interior"
+import Experience from "../Experience"
+import WoodCabin from "../World/WoodCabin"
+import Interior from "../World/Interior"
+import EventEmitter from "./EventEmitter"
 
-export default class Actions{
+export default class Actions extends EventEmitter {
     constructor()
     {
+        super()
         this.experience = new Experience()
         this.ressources = this.experience.ressources
         this.ressources.on('ready', () =>
         {
-
             this.raycaster = this.experience.raycaster
             this.postprocessing = this.experience.postprocessing
             this.mouse = this.experience.mouse
@@ -23,6 +24,7 @@ export default class Actions{
             this.setActions()
             this.setActionOnHover()
             this.setActionOnClick()
+
         })
 
     }
@@ -50,24 +52,28 @@ export default class Actions{
         this.actions.default = () =>
         {
             this.camera.camAngle.spaceUnlocked()
+            // this.trigger("leaveSpace")
         }
 
-        this.actions.sign1 = () =>
+        this.actions.boxButtonClick = () =>
         {
-            this.world.woodCabin.destroy()
-            this.world.interior = new Interior()
-            this.camera.transitions.interior(2)
-            this.camera.camAngle.interior()
-
+            this.trigger('interiorView')
         }
 
-        this.actions.sign2 = () =>
+        // this.actions.sign2 = () =>
+        // {
+        //     console.log('test')
+        //     this.world.interior.destroy()
+        //     this.world.woodCabin = new WoodCabin()
+        //     this.camera.transitions.default(2)
+        //     this.camera.camAngle.default()
+        // }
+        this.actions.planetViewEvent = (duration) =>
         {
-            console.log('test')
-            this.world.interior.destroy()
-            this.world.woodCabin = new WoodCabin()
-            this.camera.transitions.default(2)
-            this.camera.camAngle.default()
+            setTimeout(() => {
+                this.trigger('displayResumeButton')
+            }, duration * 1000);
+
         }
 
         this.actions.satellite = () =>
@@ -94,11 +100,7 @@ export default class Actions{
                     this.space.htmlParticle.triggerMorph()
                   break;
                 case 6:
-                    this.space.satellite.moveToOrbit()
-                    this.space.satellite.hidePoint()
-                    this.space.satellite.hideTerminal()
-
-                    this.space.destroyLogoParticles()
+                    this.trigger('leaveSpace')
                   break;
               }
             this.actions.satelliteClicks++
@@ -172,11 +174,8 @@ export default class Actions{
         this.raycaster.on('clickOnObject', () =>
         {
             const actionName = this.raycaster.currentIntersect.object.name
-
             const string = 'this.actions.' + actionName + '()'
-
             eval(string)
-            // this.actions.sign2()
         })
     }
 }
