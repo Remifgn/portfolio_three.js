@@ -38,7 +38,7 @@ export default [
     {
         name: 'houseBakedTexture',
         type: 'texture',
-        path: 'textures/bakedTextures/house_backed_texture.jpg'
+        path: 'textures/bakedTextures/woodCabin.jpg'
     },
     {
         name: 'forestParticleModel',
@@ -98,7 +98,7 @@ export default [
     {
         name: 'planetModel',
         type: 'gltfModel',
-        path: 'models/planet/planet.glb',
+        path: 'models/planet/planetMerged.glb',
     },
     // {
     //     name: 'codeProFont',

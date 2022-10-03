@@ -17,6 +17,7 @@ export default class Space{
         this.scene = this.experience.scene
         this.ressources = this.experience.ressources
         this.camera = this.experience.camera
+        this.actions = this.experience.actions
         this.ressources.on('ready', () =>
         {
             this.environment = new SpaceEnvironment()
@@ -37,8 +38,21 @@ export default class Space{
             this.jsParticle = new LogoParticle('js', jsPosition)
             const htmlPosition = new THREE.Vector3(-363, -220, 400)
             this.htmlParticle = new LogoParticle('html', htmlPosition)
+
+            this.actions.on('leaveSpace', () =>
+            {
+                this.leaveSpace()
+            })
         })
 
+    }
+
+    leaveSpace()
+    {
+        this.satellite.moveToOrbit()
+        this.satellite.hidePoint()
+        this.satellite.hideTerminal()
+        this.destroyLogoParticles()
     }
 
     destroyLogoParticles()

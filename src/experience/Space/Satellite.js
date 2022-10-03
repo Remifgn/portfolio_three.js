@@ -14,9 +14,12 @@ export default class Satellite{
         this.debug = this.experience.debug
         this.camera = this.experience.camera
         this.sizes = this.experience.sizes
+        this.actions = this.experience.actions
+
         this.raycaster = new THREE.Raycaster()
         this.checkboxState = false
         this.firstTerminal = true
+
 
         //Debug
         if (this.debug.active)
@@ -168,16 +171,18 @@ export default class Satellite{
                 .min(- Math.PI)
                 .max(Math.PI)
                 .step(0.0001)
-
         }
+
         this.orbitRotate = () =>
         {
+            const duration = 2
             this.scene.remove(this.model)
+            this.actions.actions.planetViewEvent(duration)
             // this.model.position.set(0, 0, 0)
 
             // this.model.position.x = 50
             this.pivot.add(this.model)
-            this.camera.transitions.planet(2)
+            this.camera.transitions.planet(duration)
             this.orbiting = true
 
         }
@@ -250,10 +255,12 @@ export default class Satellite{
     {
         this.points[1].element.classList.add('visible')
     }
+
     hidePoint()
     {
         this.points[1].element.classList.remove('visible')
     }
+
     displayTerminal()
     {
         this.checkboxState = ! this.checkboxState

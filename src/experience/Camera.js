@@ -26,6 +26,7 @@ export default class Camera{
         this.setCamAngle()
         this.setTransitions()
 
+
     }
 
     setInstance()
@@ -51,6 +52,7 @@ export default class Camera{
         this.controls.rotateSpeed = 1.2
         this.controls.zoomSpeed = 0.8
         this.controls.target.z = -1
+        this.controls.minDistance = 0
         this.controls.enableRotate = true
         this.controls.enableZoom = true
         this.controls.saveState()
@@ -64,14 +66,20 @@ export default class Camera{
             this.controls.enableRotate = false
             this.controls.enableZoom = false
 
-            gsap.to(this.instance.position, { duration: 2, ease: "power1.inOut",
-            x: 1,
-            y: -1.6,
-            z: -1.5})
-            gsap.to(this.controls.target, { duration: 2, ease: "power1.inOut",
-            x: 1,
-            y: 0.35,
-            z: 0.2})
+            gsap.to(this.instance.position, { duration: duration, ease: "power1.inOut",
+            x: -11.52 ,
+            y: 10.33,
+            z: 3.28})
+
+            gsap.to(this.instance.rotation, { duration: duration, ease: "power1.inOut",
+            x: 0.1242 ,
+            y: -1.2219,
+            z: -1.5744})
+
+            gsap.to(this.controls.target, { duration: duration, ease: "power1.inOut",
+            x: 0.954,
+            y: 5.528,
+            z: 3.241})
 
             // await this.sleep(1500)
             // this.controls.enableRotate = true
@@ -125,6 +133,9 @@ export default class Camera{
             await this.sleep(1500)
             // this.controls.enableRotate = true
             this.controls.enableZoom = true
+
+
+
         }
     }
 
@@ -135,8 +146,7 @@ export default class Camera{
 
         this.camAngle.unlocked = () =>
         {
-            console.log('ping')
-            // this.controls.reset()
+            this.controls.reset()
 
             this.controls.enableZoom = true
             this.controls.enablePan = true
@@ -201,15 +211,60 @@ export default class Camera{
 
         this.camAngle.interior = () =>
         {
+            this.scene.remove(this.instance)
+            this.experience.world.pivot.add(this.instance)
+            this.controls.reset()
+
+            this.controls.minDistance = 0
+
             this.controls.enableRotate = true
             this.controls.enableZoom = true
             this.controls.minDistance = 1.25
-            this.controls.maxDistance = 3
+            this.controls.maxDistance = 10
 
             this.controls.minAzimuthAngle = -2
             this.controls.maxAzimuthAngle = -1.11
             this.controls.minPolarAngle = 0.92
             this.controls.maxPolarAngle = 1.20
+            if (this.debugFolder)
+            {
+                this.debugFolder
+                .add(this.controls.target, 'x')
+                .name('control x')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                this.debugFolder
+                    .add(this.controls.target, 'y')
+                    .name('control y')
+                    .min(-10)
+                    .max(10)
+                    .step(0.001)
+                this.debugFolder
+                    .add(this.controls.target, 'z')
+                    .name('control z')
+                    .min(-10)
+                    .max(10)
+                    .step(0.001)
+                this.debugFolder
+                    .add(this.instance.rotation, 'x')
+                    .name('cam xrot')
+                    .min(-Math.PI)
+                    .max(Math.PI)
+                    .step(0.00001)
+                this.debugFolder
+                    .add(this.instance.rotation, 'y')
+                    .name('cam yrot')
+                    .min(-Math.PI)
+                    .max(Math.PI)
+                    .step(0.00001)
+                this.debugFolder
+                    .add(this.instance.rotation, 'z')
+                    .name('cam zrot')
+                    .min(-Math.PI)
+                    .max(Math.PI)
+                    .step(0.00001)
+            }
         }
     }
 
@@ -222,10 +277,11 @@ export default class Camera{
     update()
     {
         this.controls.update()
+        // console.log(this.controls.target.position)
         // console.log(this.instance.rotation.x)
         // console.log(this.instance.rotation.y)
         // console.log(this.instance.rotation.z)
-        // console.log('fov:' + this.fov)
+        // // console.log('fov:' + this.fov)
         // console.log('position x:' + this.instance.position.x)
         // console.log('position y:' + this.instance.position.y)
         // console.log('position z:' + this.instance.position.z)
@@ -260,12 +316,12 @@ export default class Camera{
         if (this.debugFolder)
         {
             this.debugFolder
-            .add(this.cameraPosition, 'x')
-            .name('camera x')
-            .min(-10)
-            .max(10)
-            .step(0.001)
-            .onChange(this.Movement.ajust)
+                .add(this.cameraPosition, 'x')
+                .name('camera x')
+                .min(-10)
+                .max(10)
+                .step(0.001)
+                .onChange(this.Movement.ajust)
             this.debugFolder
                 .add(this.cameraPosition, 'y')
                 .name('camera y')
