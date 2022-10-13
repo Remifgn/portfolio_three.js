@@ -48,22 +48,22 @@ export default [
     {
         name: 'houseInteriorBakedTexture',
         type: 'texture',
-        path: 'textures/bakedTextures/interior_structure.jpg'
+        path: 'textures/bakedTextures/interior_structure_4k.jpg'
     },
     {
         name: 'interiorStructure',
         type: 'gltfModel',
-        path: 'models/woodCabinInterior/mergedInteriorStructur.glb'
+        path: 'models/woodCabinInterior/interior_structure_new.glb'
     },
     {
         name: 'interiorObjectsBakedTexture',
         type: 'texture',
-        path: 'textures/bakedTextures/interior_objects.jpg'
+        path: 'textures/bakedTextures/interior_object_4k.jpg'
     },
     {
         name: 'interiorObjectModel',
         type: 'gltfModel',
-        path: 'models/woodCabinInterior/interior_objects.glb'
+        path: 'models/woodCabinInterior/interior_object_new.glb'
     },
     {
         name: 'groundModel',

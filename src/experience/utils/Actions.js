@@ -29,6 +29,8 @@ export default class Actions extends EventEmitter {
 
     }
 
+
+
     setActionOnHover(){
         this.raycaster.on('hoverObjectEnter', ()=>
         {
@@ -46,12 +48,13 @@ export default class Actions extends EventEmitter {
 
     setActions()
     {
+        this.sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
         this.actions = {}
         this.actions.satelliteClicks = 0
         this.actions.textClicks = 0
         this.actions.default = () =>
         {
-            this.camera.camAngle.spaceUnlocked()
+            this.camera.camAngle.spaceLocked()
             // this.trigger("leaveSpace")
         }
 
@@ -72,39 +75,29 @@ export default class Actions extends EventEmitter {
         {
             setTimeout(() => {
                 this.trigger('displayResumeButton')
+                this.camera.camAngle.default()
             }, duration * 1000);
 
+
+        }
+
+        this.actions.morphLogos = async() =>
+        {
+            for (var logoParticle of this.space.logosParticles)
+            {
+
+                logoParticle.triggerMorph()
+                await this.sleep(500)
+            }
         }
 
         this.actions.satellite = () =>
         {
+        }
 
-            switch (this.actions.satelliteClicks)
-            {
-                case 0:
-                    this.space.blenderParticle.triggerMorph()
-                  break;
-                case 1:
-                    this.space.pythonParticle.triggerMorph()
-                  break;
-                case 2:
-                    this.space.gitParticle.triggerMorph()
-                  break;
-                case 3:
-                    this.space.cParticle.triggerMorph()
-                  break;
-                case 4:
-                    this.space.jsParticle.triggerMorph()
-                  break;
-                case 5:
-                    this.space.htmlParticle.triggerMorph()
-                  break;
-                case 6:
-                    this.trigger('leaveSpace')
-                  break;
-              }
-            this.actions.satelliteClicks++
-
+        this.actions.orbitPlanet = () =>
+        {
+            this.trigger('leaveSpace')
         }
 
         this.actions.insa_logo = () =>
@@ -153,8 +146,10 @@ export default class Actions extends EventEmitter {
 
                 this.space.textParticle.triggerMorph()
                 setTimeout(() => {
+                    this.trigger('startExploration')
                     this.space.satellite.displayPoint()
                 }, 1000)
+                const delta = 500
 
 
             }

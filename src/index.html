@@ -6,28 +6,38 @@
     <title>Portfolio </title>
 </head>
 <body>
-    <canvas class="webgl"></canvas>
-    <!-- <section class="loading-screen" >
-        <div class="planet"></div>
-    </section> -->
-    <div class="dialog">
+    <div>
+        <canvas class="webgl"></canvas>
+        <section class="loading-screen" >
+            <div class="planet"></div>
+        </section>
         <input class="dot" type="checkbox" onchange="experience.space.satellite.displayTerminal()"></input>
         <div class="terminal">
             <p>
-                <!-- <input type="text" id="user-caption" value="Type something here!" />
-                <input type="button" id="test-typing" value="Test Typing Effect" />
-                <input type="button" id="test-erasing" value="Test Erasing Effect" /> -->
                 <input type="button" id="test-typing" value=&#8250; onclick="experience.space.satellite.terminal.typeNext()"/>
             </p>
             <p class="console">
                 <span>C:\</span><span id="caption"></span><span class="cursor">|</span>
             </p>
         </div>
-    </div>
 
-    <div class="buttonBlock">
-        <div class="boxButton">
-            <span onclick="experience.actions.actions.boxButtonClick()">MY RESUME</span>
+
+        <div class="skillsBox">
+            <div class="btn skillsButton">
+                <span>SKILLS</span>
+            </div>
+        </div>
+
+        <div class="buttonBlock">
+            <div class="btn boxButton">
+                <span onclick="experience.actions.actions.boxButtonClick()">MY RESUME</span>
+            </div>
+        </div>
+
+        <div class="orbitBox">
+            <div class="btn orbitButton">
+                <span onclick="experience.actions.actions.boxButtonClick()">ORBIT PLANET</span>
+            </div>
         </div>
     </div>
 
