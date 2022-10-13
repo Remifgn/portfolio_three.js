@@ -41,7 +41,6 @@ export default class Satellite{
 
     setModel()
     {
-        console.log(this.ressource)
         this.ressource.scene.position.set(-350, -205, 410)
         this.ressource.scene.rotation.set(-1.122, 0, -0.813)
         this.model = this.ressource.scene
@@ -192,17 +191,14 @@ export default class Satellite{
     setHtmlTerminal()
     {
         this.terminal = new TerminalTypeWriter()
-        /**+
-         * Points of interest
-         */
 
         this.points = [
             {
-                position: new THREE.Vector3(-339, -207, 410),
+                position: new THREE.Vector3(-340, -205, 410),
                 element: document.querySelector('.terminal')
             },
             {
-                position: this.model.position.clone(),
+                position: this.model.position,
                 element: document.querySelector('.dot')
             },
         ]

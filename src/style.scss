@@ -11,8 +11,8 @@ html,
 body {
     overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
     //min-height: 100vh;
     height: 100%;
     width: 100%;
@@ -28,115 +28,118 @@ body {
 }
 
 
-// .loading-screen {
-//     opacity: 1;
-//     z-index: 2;
-//     transition: 2s opacity;
-// }
+.loading-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+    z-index: 2;
+    transition: 2s opacity;
+}
 
-// .loading-screen.fade-out {
-//     opacity: 0;
-// }
+.loading-screen.fade-out {
+    opacity: 0;
+}
 
-// /* Follow me for more pens like this! */
+/* Follow me for more pens like this! */
 
-// /* Center the planet */
+/* Center the planet */
 
 
-//   .planet {
-//     display: block;
-//     width: 125px;
-//     height: 125px;
-//     position: relative;
-//     left: 50%;
-//     top: 50%;
-//     transform-style: preserve-3d;
-//     border-radius: 50%;
-//     background: #fcc96b;
-//     background: rgb(252, 201, 107);
-//     background: linear-gradient(
-//       180deg,
-//       rgba(252, 201, 107, 1) 0%,
-//       rgba(252, 201, 107, 1) 15%,
-//       rgba(247, 174, 1, 1) 15%,
-//       rgba(247, 174, 1, 1) 19%,
-//       rgba(252, 201, 107, 1) 19%,
-//       rgba(252, 201, 107, 1) 22%,
-//       rgba(247, 174, 1, 1) 22%,
-//       rgba(247, 174, 1, 1) 28%,
-//       rgba(252, 201, 107, 1) 28%,
-//       rgba(252, 201, 107, 1) 31%,
-//       rgba(252, 201, 107, 1) 33%,
-//       rgba(252, 201, 107, 1) 36%,
-//       rgba(247, 174, 1, 1) 36%,
-//       rgba(247, 174, 1, 1) 48%,
-//       rgba(252, 201, 107, 1) 48%,
-//       rgba(252, 201, 107, 1) 55%,
-//       rgba(247, 174, 1, 1) 55%,
-//       rgba(247, 174, 1, 1) 66%,
-//       rgba(252, 201, 107, 1) 66%,
-//       rgba(252, 201, 107, 1) 70%,
-//       rgba(247, 174, 1, 1) 70%,
-//       rgba(247, 174, 1, 1) 73%,
-//       rgba(252, 201, 107, 1) 73%,
-//       rgba(252, 201, 107, 1) 82%,
-//       rgba(247, 174, 1, 1) 82%,
-//       rgba(247, 174, 1, 1) 86%,
-//       rgba(252, 201, 107, 1) 86%
-//     );
-//     box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.25),
-//       inset 8px -4px 6px rgba(199, 128, 0, 0.5),
-//       inset -8px 4px 8px rgba(255, 235, 199, 0.5),
-//       inset 20px -5px 12px #f7ae01,
-//       0 0 100px rgba(255, 255, 255, 0.35);
-//     transform: rotateZ(-15deg);
-//   }
+  .planet {
+    display: block;
+    width: 125px;
+    height: 125px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform-style: preserve-3d;
+    border-radius: 50%;
+    background: #fcc96b;
+    background: rgb(252, 201, 107);
+    background: linear-gradient(
+      180deg,
+      rgba(252, 201, 107, 1) 0%,
+      rgba(252, 201, 107, 1) 15%,
+      rgba(247, 174, 1, 1) 15%,
+      rgba(247, 174, 1, 1) 19%,
+      rgba(252, 201, 107, 1) 19%,
+      rgba(252, 201, 107, 1) 22%,
+      rgba(247, 174, 1, 1) 22%,
+      rgba(247, 174, 1, 1) 28%,
+      rgba(252, 201, 107, 1) 28%,
+      rgba(252, 201, 107, 1) 31%,
+      rgba(252, 201, 107, 1) 33%,
+      rgba(252, 201, 107, 1) 36%,
+      rgba(247, 174, 1, 1) 36%,
+      rgba(247, 174, 1, 1) 48%,
+      rgba(252, 201, 107, 1) 48%,
+      rgba(252, 201, 107, 1) 55%,
+      rgba(247, 174, 1, 1) 55%,
+      rgba(247, 174, 1, 1) 66%,
+      rgba(252, 201, 107, 1) 66%,
+      rgba(252, 201, 107, 1) 70%,
+      rgba(247, 174, 1, 1) 70%,
+      rgba(247, 174, 1, 1) 73%,
+      rgba(252, 201, 107, 1) 73%,
+      rgba(252, 201, 107, 1) 82%,
+      rgba(247, 174, 1, 1) 82%,
+      rgba(247, 174, 1, 1) 86%,
+      rgba(252, 201, 107, 1) 86%
+    );
+    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.25),
+      inset 8px -4px 6px rgba(199, 128, 0, 0.5),
+      inset -8px 4px 8px rgba(255, 235, 199, 0.5),
+      inset 20px -5px 12px #f7ae01,
+      0 0 100px rgba(255, 255, 255, 0.35);
+    transform: rotateZ(-15deg);
+  }
 
-//   .planet::before {
-//     position: absolute;
-//     content: "";
-//     display: block;
-//     width: 100%;
-//     height: 100%;
-//     box-sizing: border-box;
-//     border: 16px solid #7b6f42;
-//     border-top-width: 0;
-//     border-radius: 50%;
-//     box-shadow: 0 -2px 0 #b1a693;
-//     animation: rings1 0.8s infinite linear;
-//   }
+  .planet::before {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 16px solid #7b6f42;
+    border-top-width: 0;
+    border-radius: 50%;
+    box-shadow: 0 -2px 0 #b1a693;
+    animation: rings1 0.8s infinite linear;
+  }
 
-//   .planet::after {
-//     position: absolute;
-//     content: "";
-//     display: block;
-//     width: 100%;
-//     height: 100%;
-//     box-sizing: border-box;
-//     border: 8px solid #b1a693;
-//     border-top-width: 0;
-//     border-radius: 50%;
-//     box-shadow: 0 -2px 0 #7b6f42;
-//     animation: rings2 0.8s infinite linear;
-//   }
+  .planet::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 8px solid #b1a693;
+    border-top-width: 0;
+    border-radius: 50%;
+    box-shadow: 0 -2px 0 #7b6f42;
+    animation: rings2 0.8s infinite linear;
+  }
 
-//   @keyframes rings1 {
-//     0% {
-//       transform: rotateX(65deg) rotateZ(0deg) scale(1.75);
-//     }
-//     100% {
-//       transform: rotateX(65deg) rotateZ(360deg) scale(1.75);
-//     }
-//   }
+  @keyframes rings1 {
+    0% {
+      transform: rotateX(65deg) rotateZ(0deg) scale(1.75);
+    }
+    100% {
+      transform: rotateX(65deg) rotateZ(360deg) scale(1.75);
+    }
+  }
 
-//   @keyframes rings2 {
-//     0% {
-//       transform: rotateX(65deg) rotateZ(0deg) scale(1.7);
-//     }
-//     100% {
-//       transform: rotateX(65deg) rotateZ(360deg) scale(1.7);
-//     }
-//   }
+  @keyframes rings2 {
+    0% {
+      transform: rotateX(65deg) rotateZ(0deg) scale(1.7);
+    }
+    100% {
+      transform: rotateX(65deg) rotateZ(360deg) scale(1.7);
+    }
+  }
 
 
   /* CONSOLE TYPEWRITTER  */
@@ -173,6 +176,8 @@ input[type="checkbox"] {
 {
   display: none;
   position: absolute;
+  left: 50%;
+	top: 50%;
   width: 200px;
   height: 200px;
   padding: 20px;
@@ -288,14 +293,17 @@ $dot-color: #07c60d;
 }
 .buttonBlock
 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
   display: none;
+
 }
 
-.box-2 { background-color: #3C3C3C; }
-
-
-.boxButton {
+.btn {
   display: block;
+  position: absolute;
   line-height: 50px;
   height: 50px;
   text-align: center;
@@ -349,3 +357,126 @@ $dot-color: #07c60d;
   background-color: rgba(255,255,255,0);
 }
 
+/*
+========================
+      BUTTON skills
+========================
+*/
+.skillsBox.visible
+{
+  display: block;
+}
+.skillsBox
+{
+  width: 50%;
+  display: none;
+  position: absolute;
+  top: 200px;
+  left: 250px;
+}
+
+.skillsButton {
+  color: #FFF;
+  transition: all 0.3s;
+  position: relative;
+}
+.skillsButton span {
+  transition: all 0.3s;
+}
+.skillsButton::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-color: rgba(255,255,255,0.5);
+  border-bottom-color: rgba(255,255,255,0.5);
+  transform: scale(0.1, 1);
+}
+.skillsButton:hover span {
+  letter-spacing: 2px;
+}
+.skillsButton:hover::before {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+.skillsButton::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.3s;
+  background-color: rgba(255,255,255,0.1);
+}
+.skillsButton:hover::after {
+  opacity: 0;
+  transform: scale(0.1, 1);
+}
+
+
+/*
+========================
+      BUTTON ORBIT PLANET
+========================
+*/
+.orbitBox.visible
+{
+  display: block;
+}
+.orbitBox
+{
+  width: 50%;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.orbitButton {
+  color: #FFF;
+  transition: all 0.5s;
+  position: relative;
+}
+.orbitButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(255,255,255,0.1);
+  transition: all 0.3s;
+}
+.orbitButton:hover::before {
+  opacity: 0 ;
+  transform: scale(0.5,0.5);
+}
+.orbitButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s;
+  border: 1px solid rgba(255,255,255,0.5);
+  transform: scale(1.2,1.2);
+}
+.orbitButton:hover::after {
+  opacity: 1;
+  transform: scale(1,1);
+}

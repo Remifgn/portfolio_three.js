@@ -30,8 +30,7 @@ export default class LoadingDisplay extends EventEmitter
         this.ressources.on('ready', () =>
         {
             const loadingScreen = document.querySelector('.loading-screen' );
-            console.log(loadingScreen)
-            // loadingScreen.classList.add( 'fade-out' );
+            loadingScreen.classList.add( 'fade-out' );
         })
     }
 
