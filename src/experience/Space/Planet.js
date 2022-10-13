@@ -7,6 +7,8 @@ export default class Planet{
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.ressources= this.experience.ressources
+        this.camera = this.experience.camera
+        this.sizes = this.experience.sizes
         this.time = this.experience.time
         this.debug = this.experience.debug
 
@@ -24,7 +26,6 @@ export default class Planet{
 
         this.setModel()
         //this.setMaterial()
-        this.update()
     }
 
     setModel()
@@ -57,7 +58,6 @@ export default class Planet{
 
     }
 
-
     destroy()
     {
         this.model.traverse((child) =>
@@ -74,6 +74,7 @@ export default class Planet{
 
     update()
     {
+
     }
 
 

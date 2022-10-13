@@ -136,11 +136,10 @@ export default class WoodCabin{
     setHtmlPoint()
     {
         this.point = {
-            position: new THREE.Vector3(-2, 8.6, 3.5),
+            position: this.pivot.position.clone(),
             element: document.querySelector('.buttonBlock')
         }
         this.buttonScaleFactor = 0.007
-        this.raycaster = new THREE.Raycaster()
         if(this.debug.active)
         {
             this.debugParams.buttonScaleFactor = 0.007
@@ -149,20 +148,20 @@ export default class WoodCabin{
             this.debugFolder
                 .add(this.point.position, 'x')
                 .name('button x')
-                .min(-20)
-                .max(20)
+                .min(-100)
+                .max(100)
                 .step(0.1)
             this.debugFolder
                 .add(this.point.position, 'y')
                 .name('button y')
-                .min(-20)
-                .max(20)
+                .min(-10)
+                .max(10)
                 .step(0.1)
             this.debugFolder
                 .add(this.point.position, 'z')
                 .name('button z')
-                .min(-20)
-                .max(20)
+                .min(-100)
+                .max(100)
                 .step(0.1)
             this.debugFolder
                 .add(this.debugParams, 'buttonScaleFactor')
@@ -182,41 +181,10 @@ export default class WoodCabin{
         const screenPosition = this.point.position.clone()
         screenPosition.project(this.camera.instance)
 
-        // Set the raycaster
-        this.raycaster.setFromCamera(screenPosition, this.camera.instance)
-        const intersects = this.raycaster.intersectObjects(this.scene.children, true)
 
-        // // No intersect found
-        // if(intersects.length === 0)
-        // {
-        //     // Show
-        //     this.point.element.classList.add('visible')
-        // }
-
-        // // Intersect found
-        // else
-        // {
-        //     // Get the distance of the intersection and the distance of the point
-        //     const intersectionDistance = intersects[0].distance
-        //     const pointDistance = this.point.position.distanceTo(this.camera.instance.position)
-
-        //     // Intersection is close than the point
-        //     if(intersectionDistance < pointDistance)
-        //     {
-        //         // Hide
-        //         this.point.element.classList.add('visible')
-        //     }
-        //     // Intersection is further than the point
-        //     else
-        //     {
-        //         // Show
-        //         this.point.element.classList.add('visible')
-        //     }
-        // }
-
-        const translateX = screenPosition.x * this.sizes.width * 0.5
-        const translateY = - screenPosition.y * this.sizes.height * 0.5
-        const scale = 1 / (this.camera.instance.position.distanceTo(this.point.position) * this.debugParams.buttonScaleFactor)
+        const translateX = screenPosition.x * this.sizes.width * 0.5 - 125
+        const translateY = - screenPosition.y * this.sizes.height * 0.5 - 25
+        const scale = 1 / (this.camera.instance.position.distanceTo(this.point.position) * this.buttonScaleFactor)
         // console.log(scale)
         this.point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px) scale(${scale}, ${scale})`
 

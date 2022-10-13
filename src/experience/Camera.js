@@ -201,8 +201,8 @@ export default class Camera{
         {
             this.controls.enableRotate = true
             this.controls.enableZoom = true
-            this.controls.minDistance = 2
-            this.controls.maxDistance = 14
+            this.controls.minDistance = 50
+            this.controls.maxDistance = 1000
             this.controls.minAzimuthAngle = 0
             this.controls.maxAzimuthAngle = Math.PI *1.9999
             this.controls.minPolarAngle = Math.PI *0.2
