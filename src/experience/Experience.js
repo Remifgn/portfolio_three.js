@@ -84,6 +84,11 @@ export default class Experience{
             this.rotationSpeed = 0
         })
 
+        this.actions.on('orbitView', () =>
+        {
+            this.rotationSpeed = Math.PI / (180 * 60)
+        })
+
     }
 
     resize()

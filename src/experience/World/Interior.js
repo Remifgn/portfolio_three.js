@@ -67,7 +67,9 @@ export default class Interior{
         const upworkLogo = this.modelObjects.children.find(child => child.name === 'upwork_logo')
         this.experience.objectToTest.push(upworkLogo)
         this.logos.push(upworkLogo)
-        console.log(this.experience.objectToTest)
+        const rocket = this.modelObjects.children.find(child => child.name === 'rocket')
+        this.logos.push(rocket)
+        this.experience.objectToTest.push(rocket)
 
 
         this.modelObjects.scale.set(this.modelParams.scale, this.modelParams.scale, this.modelParams.scale)
@@ -213,9 +215,7 @@ export default class Interior{
         })
         this.scene.remove(this.modelStructure)
 
-        this.sign2.sign.plane.geometry.dispose()
-        this.sign2.sign.plane.material.dispose()
-        this.scene.remove(this.sign2.sign.plane)
+
 
         const removeFromObjectToTest = (item) => {
             var index = this.experience.objectToTest.indexOf(item)
@@ -228,7 +228,7 @@ export default class Interior{
             removeFromObjectToTest(logo)
         }
 
-        removeFromObjectToTest(this.sign2.sign.plane)
+        //removeFromObjectToTest(this.sign2.sign.plane)
     }
 
     update()

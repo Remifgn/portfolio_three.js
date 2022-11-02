@@ -74,7 +74,13 @@ export default class HtmlDisplay{
             this.orbitButton.element.classList.remove('visible')
         })
 
+        // this.actions.on('interiorView',() => {
 
+        //     this.orbitButton.element.classList.add('visible')
+        //     this.orbitButton.position.set()
+        //     console.log('orbit_button')
+
+        // })
 
         this.orbitButton.element.addEventListener("click", () =>
         {

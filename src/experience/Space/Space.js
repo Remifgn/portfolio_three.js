@@ -67,8 +67,6 @@ export default class Space{
 
             const position = new THREE.Vector3(-390 + (idx % 3) * 15,((idx > 2)? -220: -208), 400 )
             const logoParticle = new LogoParticle(logoName, position)
-            console.log(logoName)
-            console.log(position)
             this.logosParticles.push(logoParticle)
             idx ++
         }

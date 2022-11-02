@@ -47,24 +47,40 @@ export default class World{
         {
 
             this.camera = this.experience.camera
-            console.log(this.woodCabin.point.element)
             this.woodCabin.point.element.classList.remove('visible')
-            console.log(this.woodCabin.point.element)
 
             this.woodCabin.destroy()
             this.interior = new Interior()
-            const duration =2
 
-            this.camera.transitions.interior(duration)
+            this.camera.transitions.interior(2)
 
             setTimeout(() => {
-                this.camera.camAngle.interior(this.interior.modelObjects.position)
-                console.log('pin')
-            }, duration)
+                this.camera.camAngle.interior()
+            }, 2000)
 
             this.rotationSpeed = 0
 
         })
+
+        this.actions.on('orbitView', () =>
+        {
+
+            this.camera = this.experience.camera
+            this.woodCabin.point.element.classList.add('visible')
+
+            this.woodCabin = new WoodCabin()
+            this.interior.destroy()
+
+            this.camera.transitions.planet(2)
+
+            setTimeout(() => {
+                this.camera.camAngle.planet()
+            }, 2000)
+
+            this.rotationSpeed = 0
+
+        })
+
 
     }
 

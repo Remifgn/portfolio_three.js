@@ -13,7 +13,7 @@ export default class CamControls{
 
     setDefaultCam()
     {
-        this.camera.camAngle.default()
+        this.camera.camAngle.planet()
     }
 
     setInteriorCam()
