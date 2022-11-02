@@ -18,7 +18,6 @@ export default class Actions extends EventEmitter {
             this.space = this.experience.space
             this.camera = this.experience.camera
             this.camControls = this.experience.camcontrols
-            console.log(this.space)
             this.satellite = this.space.satellite
 
             this.setActions()
@@ -55,7 +54,6 @@ export default class Actions extends EventEmitter {
         this.actions.default = () =>
         {
             this.camera.camAngle.spaceLocked()
-            // this.trigger("leaveSpace")
         }
 
         this.actions.boxButtonClick = () =>
@@ -75,7 +73,7 @@ export default class Actions extends EventEmitter {
         {
             setTimeout(() => {
                 this.trigger('displayResumeButton')
-                this.camera.camAngle.default()
+                this.camera.camAngle.planet()
             }, duration * 1000);
 
 
@@ -127,6 +125,10 @@ export default class Actions extends EventEmitter {
         this.actions.github_logo = () =>
         {
             window.open('https://github.com/Remifgn/portfolio_three.js', '_blank').focus();
+        }
+        this.actions.rocket = () =>
+        {
+            this.trigger('orbitView')
         }
 
 

@@ -63,23 +63,33 @@ export default class Camera{
         this.transitions = {}
         this.transitions.interior = async (duration) =>
         {
+            //this.controls.reset()
+
+
+            this.controls.minDistance = 1.25
+            this.controls.maxDistance = 200
+
+
+
+
             this.controls.enableRotate = false
             this.controls.enableZoom = false
 
-            gsap.to(this.instance.position, { duration: duration, ease: "power1.inOut",
-            x: -11.52 ,
-            y: 10.33,
-            z: 3.28})
+
+            gsap.to(this.instance.position, { duration: 2, ease: "power1.inOut",
+            x: -7.28 ,
+            y: 9.17,
+            z: 1.53})
 
             gsap.to(this.instance.rotation, { duration: duration, ease: "power1.inOut",
-            x: 0.1242 ,
-            y: -1.2219,
-            z: -1.5744})
+            x: -1.92 ,
+            y: -1.07,
+            z: -1.97})
 
             gsap.to(this.controls.target, { duration: duration, ease: "power1.inOut",
-            x: 0.954,
-            y: 5.528,
-            z: 3.241})
+            x: 0.548,
+            y: 5.884,
+            z: 2.835})
 
             // await this.sleep(1500)
             // this.controls.enableRotate = true
@@ -197,8 +207,10 @@ export default class Camera{
             this.controls.maxPolarAngle = Math.PI
         }
 
-        this.camAngle.default = () =>
+        this.camAngle.planet = () =>
         {
+            this.experience.world.pivot.remove(this.instance)
+            this.scene.add(this.instance)
             this.controls.enableRotate = true
             this.controls.enableZoom = true
             this.controls.minDistance = 50
@@ -213,9 +225,7 @@ export default class Camera{
         {
             this.scene.remove(this.instance)
             this.experience.world.pivot.add(this.instance)
-            this.controls.reset()
 
-            this.controls.minDistance = 0
 
             this.controls.enableRotate = true
             this.controls.enableZoom = true
